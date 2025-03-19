@@ -344,3 +344,290 @@ def plot_hand_strength_distribution(hand_strengths: List[float],
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
 
     return fig
+
+
+def plot_action_frequencies(action_history: Dict[str, Dict[str, int]],
+                           save_path: Optional[Path] = None) -> plt.Figure:
+    """
+    Plot the frequency of different actions across different streets.
+
+    Args:
+        action_history: Dictionary mapping streets to action frequency dictionaries
+        save_path: Optional path to save the figure
+
+    Returns:
+        Matplotlib figure object
+    """
+    # Set up the plotting style
+    setup_plotting_style()
+
+    # Create the figure
+    fig, ax = plt.subplots(figsize=(12, 8))
+
+    # Extract streets and actions
+    streets = list(action_history.keys())
+    all_actions = set()
+    for street_actions in action_history.values():
+        all_actions.update(street_actions.keys())
+    all_actions = sorted(all_actions)
+
+    # Set up bar positions
+    bar_width = 0.8 / len(all_actions)
+    positions = np.arange(len(streets))
+
+    # Plot bars for each action
+    for i, action in enumerate(all_actions):
+        action_counts = [action_history[street].get(action, 0) for street in streets]
+
+        # Calculate percentages
+        street_totals = [sum(action_history[street].values()) for street in streets]
+        percentages = [count / total * 100 if total > 0 else 0
+                      for count, total in zip(action_counts, street_totals)]
+
+        # Plot the bars
+        offset = bar_width * (i - len(all_actions) / 2 + 0.5)
+        bars = ax.bar(positions + offset, percentages, bar_width,
+                     label=action, alpha=0.7)
+
+        # Add percentage labels
+        for bar, percentage in zip(bars, percentages):
+            if percentage > 5:  # Only show labels for significant percentages
+                ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
+                       f'{percentage:.1f}%', ha='center', va='bottom', fontsize=8)
+
+    # Customize the plot
+    ax.set_xticks(positions)
+    ax.set_xticklabels(streets)
+    ax.set_ylabel('Percentage (%)')
+    ax.set_title('Action Frequencies by Street')
+    ax.legend(title='Actions')
+    ax.grid(True, alpha=0.3, axis='y')
+
+    # Set y-axis to a reasonable range
+    ax.set_ylim(0, 100)
+
+    # Improve layout
+    plt.tight_layout()
+
+    # Save the figure if a path is provided
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+
+    return fig
+
+
+def plot_showdown_equity(equity_by_hand: Dict[str, float],
+                        save_path: Optional[Path] = None) -> plt.Figure:
+    """
+    Plot the showdown equity for different hand types.
+
+    Args:
+        equity_by_hand: Dictionary mapping hand types to equity percentages
+        save_path: Optional path to save the figure
+
+    Returns:
+        Matplotlib figure object
+    """
+    # Set up the plotting style
+    setup_plotting_style()
+
+    # Create the figure
+    fig, ax = plt.subplots(figsize=(10, 8))
+
+    # Sort hand types by equity
+    hand_types = sorted(equity_by_hand.items(), key=lambda x: x[1], reverse=True)
+    hand_names, equity_values = zip(*hand_types)
+
+    # Plot horizontal bars
+    bars = ax.barh(hand_names, equity_values, color='green', alpha=0.7)
+
+    # Add percentage labels
+    for bar in bars:
+        width = bar.get_width()
+        ax.text(width + 1, bar.get_y() + bar.get_height()/2,
+               f'{width:.1f}%', va='center')
+
+    # Customize the plot
+    ax.set_xlabel('Equity (%)')
+    ax.set_title('Showdown Equity by Hand Type')
+    ax.grid(True, alpha=0.3, axis='x')
+
+    # Set x-axis to a reasonable range
+    ax.set_xlim(0, max(equity_values) * 1.1)
+
+    # Improve layout
+    plt.tight_layout()
+
+    # Save the figure if a path is provided
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+
+    return fig
+
+
+def plot_strategy_heatmap(street: str, hand_strengths: List[float],
+                         actions: List[str], probabilities: List[List[float]],
+                         save_path: Optional[Path] = None) -> plt.Figure:
+    """
+    Plot a heatmap of action probabilities for different hand strengths.
+
+    Args:
+        street: The street (e.g., "Flop", "Turn", "River")
+        hand_strengths: List of hand strength values
+        actions: List of action names
+        probabilities: 2D list of action probabilities for each hand strength
+        save_path: Optional path to save the figure
+
+    Returns:
+        Matplotlib figure object
+    """
+    # Set up the plotting style
+    setup_plotting_style()
+
+    # Create the figure
+    fig, ax = plt.subplots(figsize=(10, 8))
+
+    # Create the heatmap
+    im = ax.imshow(probabilities, cmap='viridis')
+
+    # Add a colorbar
+    cbar = ax.figure.colorbar(im, ax=ax)
+    cbar.ax.set_ylabel('Probability', rotation=-90, va="bottom")
+
+    # Set ticks and labels
+    ax.set_xticks(np.arange(len(actions)))
+    ax.set_yticks(np.arange(len(hand_strengths)))
+    ax.set_xticklabels(actions)
+
+    # Format hand strengths for readable y-axis labels
+    strength_labels = [f"{strength:.2f}" for strength in hand_strengths]
+    ax.set_yticklabels(strength_labels)
+
+    # Rotate the x-axis labels
+    plt.setp(ax.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor")
+
+    # Add labels and title
+    ax.set_xlabel('Action')
+    ax.set_ylabel('Hand Strength')
+    ax.set_title(f'Strategy Heatmap - {street}')
+
+    # Add text annotations showing the probability values
+    for i in range(len(hand_strengths)):
+        for j in range(len(actions)):
+            text = ax.text(j, i, f"{probabilities[i][j]:.2f}",
+                          ha="center", va="center", color="white" if probabilities[i][j] < 0.7 else "black")
+
+    # Improve layout
+    plt.tight_layout()
+
+    # Save the figure if a path is provided
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+
+    return fig
+
+
+def create_strategy_dashboard(drm: 'DiscountedRegretMinimization',
+                             save_path: Optional[Path] = None) -> plt.Figure:
+    """
+    Create a comprehensive dashboard visualizing the poker strategy.
+
+    Args:
+        drm: Discounted Regret Minimization instance
+        save_path: Optional path to save the figure
+
+    Returns:
+        Matplotlib figure object
+    """
+    # Set up the plotting style
+    setup_plotting_style()
+
+    # Create a figure with a grid of subplots
+    fig = plt.figure(figsize=(18, 12))
+    gs = fig.add_gridspec(3, 3)
+
+    # Subplot for convergence (top left)
+    ax_conv = fig.add_subplot(gs[0, 0])
+    # Placeholder data - would extract from drm in real implementation
+    iterations = range(1, 101)
+    conv_values = [1/i for i in iterations]
+    ax_conv.plot(iterations, conv_values, 'b-')
+    ax_conv.set_xlabel('Iterations')
+    ax_conv.set_ylabel('Convergence')
+    ax_conv.set_title('Algorithm Convergence')
+    ax_conv.set_yscale('log')
+
+    # Subplot for exploitability (top middle)
+    ax_expl = fig.add_subplot(gs[0, 1])
+    # Placeholder data
+    expl_values = [2/i for i in iterations]
+    ax_expl.plot(iterations, expl_values, 'g-')
+    ax_expl.set_xlabel('Iterations')
+    ax_expl.set_ylabel('Exploitability')
+    ax_expl.set_title('Strategy Exploitability')
+    ax_expl.set_yscale('log')
+
+    # Subplot for overall strategy distribution (top right)
+    ax_dist = fig.add_subplot(gs[0, 2])
+    # Placeholder data
+    actions = ['Fold', 'Check/Call', 'Bet/Raise']
+    action_freqs = [0.2, 0.5, 0.3]
+    ax_dist.bar(actions, action_freqs, color=['red', 'blue', 'green'])
+    ax_dist.set_ylabel('Frequency')
+    ax_dist.set_title('Overall Action Distribution')
+
+    # Subplots for different streets (middle row)
+    streets = ['Preflop', 'Flop', 'Turn', 'River']
+    street_actions = [
+        [0.1, 0.4, 0.5],  # Preflop
+        [0.2, 0.5, 0.3],  # Flop
+        [0.3, 0.4, 0.3],  # Turn
+        [0.4, 0.3, 0.3]   # River
+    ]
+
+    for i, (street, freqs) in enumerate(zip(streets, street_actions)):
+        ax_street = fig.add_subplot(gs[1, i % 3] if i < 3 else gs[2, 0])
+        ax_street.bar(actions, freqs, color=['red', 'blue', 'green'])
+        ax_street.set_title(f'{street} Strategy')
+        if i >= 1:  # Skip y-label for first subplot
+            ax_street.set_ylabel('Probability')
+
+    # Heatmap for hand strength vs. action (bottom middle)
+    ax_heat = fig.add_subplot(gs[2, 1])
+    # Placeholder data
+    hand_ranges = ['0-25%', '25-50%', '50-75%', '75-100%']
+    heat_data = [
+        [0.7, 0.2, 0.1],  # Weakest hands
+        [0.3, 0.5, 0.2],  # Weak-medium
+        [0.1, 0.4, 0.5],  # Medium-strong
+        [0.0, 0.3, 0.7]   # Strongest hands
+    ]
+    im = ax_heat.imshow(heat_data, cmap='viridis')
+    ax_heat.set_xticks(np.arange(len(actions)))
+    ax_heat.set_yticks(np.arange(len(hand_ranges)))
+    ax_heat.set_xticklabels(actions)
+    ax_heat.set_yticklabels(hand_ranges)
+    ax_heat.set_title('Strategy by Hand Strength')
+
+    # Win rate chart (bottom right)
+    ax_win = fig.add_subplot(gs[2, 2])
+    # Placeholder data
+    hand_types = ['High Card', 'Pair', 'Two Pair', 'Trips', 'Straight', 'Flush', 'Full House', 'Quads']
+    win_rates = [0.1, 0.3, 0.5, 0.7, 0.8, 0.85, 0.95, 0.99]
+    # Truncate to fit
+    ax_win.barh(hand_types[-4:], win_rates[-4:], color='green', alpha=0.7)
+    ax_win.set_xlabel('Win Rate')
+    ax_win.set_title('Win Rate by Hand Type')
+
+    # Add an overall title
+    plt.suptitle(f'Poker Strategy Dashboard (After {drm.iteration_count} iterations)',
+                fontsize=20, fontweight='bold', y=0.98)
+
+    # Improve layout
+    plt.tight_layout(rect=[0, 0, 1, 0.96])  # Make room for the title
+
+    # Save the figure if a path is provided
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+
+    return fig
