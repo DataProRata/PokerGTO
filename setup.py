@@ -22,22 +22,4 @@ setup(
             'pokergto=src.interface.main_window:main',
         ],
     },
-)from setuptools import setup, find_packages
-
-setup(
-    name='PokerGTO',
-    version='0.1.0',
-    packages=find_packages(where='src'),
-    package_dir={'': 'src'},
-    install_requires=[
-        'numpy>=2.1.2',
-        'torch>=2.6.0',
-        'PyQt6>=6.5.0',
-        'matplotlib>=3.7.1',
-        'requests>=2.32.3',
-        'tqdm>=4.65.0',
-    ],
-    author='Your Name',
-    description='Game Theory Optimal Poker Strategy AI',
-    python_requires='>=3.10',
 )

@@ -58,7 +58,7 @@ typing-extensions>=4.5.0
 pywin32>=306
 
 # Crypto and Security (optional)
-cryptography>=41.0.1# Core Scientific Computing and Machine Learning
+cryptography>=41.0.1
 numpy>=2.1.2
 torch>=2.6.0
 torchvision>=0.15.0
@@ -118,7 +118,7 @@ typing-extensions>=4.5.0
 pywin32>=306
 
 # Crypto and Security (optional)
-cryptography>=41.0.1# Core Scientific Computing and Machine Learning
+cryptography>=41.0.1
 numpy>=2.1.2
 torch>=2.6.0
 torchvision>=0.15.0
@@ -179,7 +179,7 @@ typing-extensions>=4.5.0
 pywin32>=306
 
 # Crypto and Security (optional, depending on future requirements)
-cryptography>=41.0.1# Core Scientific Computing and Machine Learning
+cryptography>=41.0.1 # Core Scientific Computing and Machine Learning
 numpy>=2.1.2
 torch>=2.6.0
 torchvision>=0.15.0
