@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
-play.py - Interactive poker play with advanced GTO-based assistance
+play.py - Interactive poker play with GTO-based recommendations
 
-This script allows users to play poker with intelligent AI opponents
-using Game Theory Optimal (GTO) strategies derived from machine learning.
+This script provides an interactive poker experience with detailed
+information display and GTO strategy assistance.
 """
 
 import os
@@ -15,7 +15,6 @@ import numpy as np
 import random
 import torch
 from pathlib import Path
-import json
 
 # Add the project directory to the path so we can import our modules
 project_root = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -29,25 +28,6 @@ from src.algorithms.discounted_regret import DiscountedRegretMinimization, InfoS
 from src.utils.cuda_utils import setup_cuda, get_cuda_info
 from src.utils.logging import setup_logger
 import config
-
-
-def parse_args():
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description='Interactive poker play with GTO assistance.')
-    parser.add_argument('--model_path', type=str, default=str(config.ADAPTIVE_MODEL_PATH),
-                        help='Path to the trained model')
-    parser.add_argument('--mode', type=str, choices=['interactive', 'auto', 'training'],
-                        default='interactive',
-                        help='Play mode: interactive, auto, or training')
-    parser.add_argument('--log_file', type=str, default=None,
-                        help='Path to save the log file')
-    parser.add_argument('--no_cuda', action='store_true',
-                        help='Disable CUDA even if available')
-    parser.add_argument('--debug', action='store_true',
-                        help='Enable debug logging')
-    parser.add_argument('--num_hands', type=int, default=10,
-                        help='Number of hands to play in non-interactive modes')
-    return parser.parse_args()
 
 
 def print_card(card_idx):
@@ -66,47 +46,89 @@ def print_cards(cards):
     return ' '.join(print_card(card) for card in cards)
 
 
-def get_hand_description(evaluator, cards, community_cards=None):
+def display_game_state(state, player_cards, community_cards=None):
     """
-    Generate a descriptive string for a hand.
+    Display the current game state with detailed information.
 
     Args:
-        evaluator: HandEvaluator instance
-        cards: Hole cards
-        community_cards: Community cards (optional)
-
-    Returns:
-        Descriptive string of the hand
+        state: Current game state
+        player_cards: Player's hole cards
+        community_cards: Optional community cards (defaults to state's community cards)
     """
+    print("\n" + "=" * 60)
+    print(f"Street: {state.street.name}")
+    print(f"Pot: ${state.pot:.2f}")
+
+    # Display player's hand
+    print(f"\nYour Hand: {print_cards(player_cards)}")
+
+    # Display community cards
     if community_cards is None:
-        community_cards = []
+        community_cards = state.community_cards
 
-    # Get hand strength
-    hand_strength = evaluator.evaluate_hand(cards, community_cards)
-    hand_type = evaluator.get_hand_type(hand_strength)
+    if community_cards:
+        print(f"Community Cards: {print_cards(community_cards)}")
+    else:
+        print("Community Cards: None")
 
-    # Convert card indices to readable strings
-    card_strs = [print_card(card) for card in cards]
-    community_card_strs = [print_card(card) for card in community_cards]
+    # Display player and AI stacks
+    for i in range(state.num_players):
+        status = "Active"
+        if state.folded[i]:
+            status = "Folded"
+        elif state.all_in[i]:
+            status = "All-in"
 
-    return (f"{hand_type} " +
-            f"(Hole: {' '.join(card_strs)}" +
-            (f" | Community: {' '.join(community_card_strs)}" if community_cards else "") + ")")
+        print(f"Player {i} Stack: ${state.stacks[i]:.2f} | Status: {status}")
+
+    print("=" * 60 + "\n")
+
+
+def parse_args():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description='Interactive poker play with GTO assistance.')
+    parser.add_argument('--model_path', type=str, default=str(config.ADAPTIVE_MODEL_PATH),
+                        help='Path to the trained model')
+    parser.add_argument('--mode', type=str, choices=['interactive', 'auto', 'training'],
+                        default='interactive',
+                        help='Play mode: interactive, auto, or training')
+    parser.add_argument('--log_file', type=str, default=None,
+                        help='Path to save the log file')
+    parser.add_argument('--no_cuda', action='store_true',
+                        help='Disable CUDA even if available')
+    parser.add_argument('--debug', action='store_true',
+                        help='Enable debug logging')
+    return parser.parse_args()
+
+
+def load_model(args, device, rules, evaluator, logger):
+    """Load the pre-trained DRM model."""
+    # Initialize the DRM algorithm
+    drm = DiscountedRegretMinimization(
+        rules=rules,
+        evaluator=evaluator,
+        discount_factor=config.DRM_PARAMS['discount_factor'],
+        device=device,
+        batch_size=config.DRM_PARAMS['batch_size']
+    )
+
+    # Load the pre-trained model if it exists
+    model_path = Path(args.model_path)
+    if model_path.exists():
+        try:
+            drm.load_model(model_path)
+            logger.info(f"Loaded pre-trained model from {model_path}")
+        except Exception as e:
+            logger.warning(f"Could not load model from {model_path}: {e}")
+            logger.info("Starting with a fresh model")
+    else:
+        logger.warning(f"Model path {model_path} does not exist. Starting with a fresh model.")
+
+    return drm
 
 
 def get_strategy_recommendation(drm, state, hole_cards, community_cards):
-    """
-    Get a strategy recommendation from the GTO model.
-
-    Args:
-        drm: Discounted Regret Minimization model
-        state: Current game state
-        hole_cards: Player's hole cards
-        community_cards: Current community cards
-
-    Returns:
-        Sorted list of action recommendations
-    """
+    """Get a strategy recommendation from the GTO model."""
     info_state = InfoState(
         player_id=state.current_player,
         hole_cards=hole_cards,
@@ -139,7 +161,9 @@ def ai_choose_action(drm, state, hole_cards, community_cards, logger):
         Tuple of (chosen_action, bet_amount)
     """
     # Get strategy recommendations
-    recommendations = get_strategy_recommendation(drm, state, hole_cards, community_cards)
+    recommendations = get_strategy_recommendation(
+        drm, state, hole_cards, community_cards
+    )
 
     # Get legal actions
     legal_actions = state.get_legal_actions()
@@ -167,7 +191,6 @@ def ai_choose_action(drm, state, hole_cards, community_cards, logger):
     bet_amount = 0.0
     if chosen_action in [Action.BET, Action.RAISE]:
         # Intelligent bet sizing based on strategy and hand strength
-        # Here we add some randomness to make it more realistic
         bet_range = max_amount - min_amount
         bet_amount = min_amount + random.random() * bet_range * 0.5
 
@@ -176,43 +199,6 @@ def ai_choose_action(drm, state, hole_cards, community_cards, logger):
                 (f"Amount: {bet_amount:.2f}" if bet_amount > 0 else ""))
 
     return chosen_action, bet_amount
-
-
-def print_hand_summary(state, evaluator):
-    """
-    Print a summary of the hand, including hand strengths.
-
-    Args:
-        state: Final game state
-        evaluator: HandEvaluator instance
-    """
-    print("\n--- Hand Summary ---")
-    for i in range(state.num_players):
-        if not state.folded[i]:
-            hand_desc = get_hand_description(
-                evaluator,
-                state.player_cards[i],
-                state.community_cards
-            )
-            print(f"Player {i}: {hand_desc}")
-
-    if len(set(not folded for folded in state.folded)) == 1:
-        print("Winner: By Fold")
-    else:
-        strengths = [
-            evaluator.evaluate_hand(state.player_cards[i], state.community_cards)
-            for i in range(state.num_players)
-        ]
-        winners = [
-            i for i, strength in enumerate(strengths)
-            if strength == max(strengths) and not state.folded[i]
-        ]
-
-        if len(winners) == 1:
-            print(f"Winner: Player {winners[0]}")
-        else:
-            print(f"Split Pot: Players {winners}")
-    print("-------------------\n")
 
 
 def play_interactive(drm, rules, evaluator, logger):
@@ -237,6 +223,9 @@ def play_interactive(drm, rules, evaluator, logger):
         hole_cards = rules.deal_hole_cards(num_players=2)
         state.deal_hole_cards(hole_cards)
 
+        # Display initial game state
+        display_game_state(state, hole_cards[0])
+
         # Play the hand
         hand_finished = False
         while not hand_finished:
@@ -249,7 +238,8 @@ def play_interactive(drm, rules, evaluator, logger):
                         remaining_cards = rules.get_random_cards(remaining)
                         state.community_cards.extend(remaining_cards)
 
-                print_hand_summary(state, evaluator)
+                # Display final game state
+                display_game_state(state, hole_cards[0], state.community_cards)
 
                 # Determine winner
                 player_hand = evaluator.evaluate_hand(
@@ -257,14 +247,24 @@ def play_interactive(drm, rules, evaluator, logger):
                 ai_hand = evaluator.evaluate_hand(
                     state.player_cards[1], state.community_cards)
 
-                if player_hand > ai_hand:
+                # Determine and display winner
+                if state.folded[1]:
                     player_wins += 1
-                    print("Congratulations! You won the hand!")
+                    print("You won by AI fold!")
+                elif state.folded[0]:
+                    ai_wins += 1
+                    print("AI won by your fold!")
+                elif player_hand > ai_hand:
+                    player_wins += 1
+                    print("You won the hand!")
                 elif player_hand < ai_hand:
                     ai_wins += 1
                     print("AI won the hand!")
                 else:
                     print("It's a tie!")
+
+                # Display scores
+                print(f"\nScore - You: {player_wins}, AI: {ai_wins}")
 
                 hand_finished = True
                 continue
@@ -273,12 +273,9 @@ def play_interactive(drm, rules, evaluator, logger):
             current_player = state.current_player
 
             if current_player == 0:  # Human player
-                # Player hole cards
-                player_cards = state.player_cards[0]
-
                 # Get GTO recommendations
                 recommendations = get_strategy_recommendation(
-                    drm, state, player_cards, state.community_cards
+                    drm, state, hole_cards[0], state.community_cards
                 )
 
                 # Display recommendations
@@ -342,23 +339,29 @@ def play_interactive(drm, rules, evaluator, logger):
                 if ai_action is not None:
                     street_complete = state.apply_action(ai_action, ai_amount)
 
+            # Display updated game state after each turn
+            display_game_state(state, hole_cards[0])
+
             # Deal new street if necessary
             if street_complete and not state.is_terminal():
                 if state.street == Street.PREFLOP:
                     # Deal flop
                     flop = rules.deal_flop()
                     state.deal_community_cards(flop, Street.FLOP)
+                    print("\nFlop dealt!")
                 elif state.street == Street.FLOP:
                     # Deal turn
                     turn = rules.deal_turn()
                     state.deal_community_cards(turn, Street.TURN)
+                    print("\nTurn dealt!")
                 elif state.street == Street.TURN:
                     # Deal river
                     river = rules.deal_river()
                     state.deal_community_cards(river, Street.RIVER)
+                    print("\nRiver dealt!")
 
-        # Print running score
-        print(f"\nScore - You: {player_wins}, AI: {ai_wins}")
+                # Display updated game state after dealing cards
+                display_game_state(state, hole_cards[0])
 
         # Ask if the user wants to play another hand
         play_again = input("Play another hand? (y/n): ").lower()
@@ -374,7 +377,7 @@ def main():
     # Parse arguments
     args = parse_args()
 
-    # Setup environment
+    # Setup logging
     logger = setup_logger("play", logging.DEBUG if args.debug else logging.INFO, args.log_file)
 
     # Setup CUDA
@@ -387,9 +390,6 @@ def main():
         logger.info(f"Using CPU: {torch.get_num_threads()} threads")
 
     try:
-        # Load model
-        logger.info("Loading trained model...")
-
         # Initialize the poker game engine components
         rules = PokerRules(
             small_blind=config.GAME_PARAMS['small_blind'],
@@ -400,36 +400,12 @@ def main():
 
         evaluator = HandEvaluator()
 
-        # Initialize the DRM algorithm
-        drm = DiscountedRegretMinimization(
-            rules=rules,
-            evaluator=evaluator,
-            discount_factor=config.DRM_PARAMS['discount_factor'],
-            device=device,
-            batch_size=config.DRM_PARAMS['batch_size']
-        )
+        # Load trained model
+        logger.info("Loading trained model...")
+        drm = load_model(args, device, rules, evaluator, logger)
 
-        # Load the trained model if it exists
-        model_path = Path(args.model_path)
-        if model_path.exists():
-            try:
-                drm.load_model(model_path)
-                logger.info(f"Loaded trained model from {model_path}")
-            except Exception as e:
-                logger.warning(f"Could not load model from {model_path}: {e}")
-                logger.info("Starting with a fresh model")
-        else:
-            logger.warning(f"Model path {model_path} does not exist. Starting with a fresh model.")
-
-        # Run play modes
-        if args.mode == 'interactive':
-            play_interactive(drm, rules, evaluator, logger)
-        elif args.mode == 'auto':
-            # Placeholder for future auto play mode implementation
-            logger.info("Auto play mode not yet implemented")
-        elif args.mode == 'training':
-            # Placeholder for future training mode implementation
-            logger.info("Training mode not yet implemented")
+        # Run interactive play
+        play_interactive(drm, rules, evaluator, logger)
 
         logger.info("Play session completed successfully")
         return 0
