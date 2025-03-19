@@ -1,9 +1,9 @@
-numpy
+numpy~=2.1.2
 pandas
-matplotlib
-torch
+matplotlib~=3.10.0
+torch~=2.6.0+cu126
 tensorboard
-requests
+requests~=2.32.3
 python-dotenv
-tqdm
+tqdm~=4.67.1
 pytest
