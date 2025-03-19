@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PokerGTO"
+version = "0.1.0"
+description = "Game Theory Optimal Poker Strategy AI"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.1.2",
+    "torch>=2.6.0",
+    "PyQt6>=6.5.0",
+    "matplotlib>=3.7.1",
+    "requests>=2.32.3",
+    "tqdm>=4.65.0",
+    "PyQtWebEngine>=6.5.0",
+]
+
+[tool.setuptools]
+packages = ["src"]
+
+[project.scripts]
+pokergto = "src.interface.main_window:main"
