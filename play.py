@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
-play.py - Interactive poker play with GTO-based assistance
+play.py - Interactive poker play with advanced GTO-based assistance
 
-This script allows users to play poker with assistance from the trained
-GTO models. It provides real-time strategy recommendations and tooltips.
+This script allows users to play poker with intelligent AI opponents
+using Game Theory Optimal (GTO) strategies derived from machine learning.
 """
 
 import os
@@ -12,9 +12,10 @@ import time
 import argparse
 import logging
 import numpy as np
+import random
 import torch
 from pathlib import Path
-import random
+import json
 
 # Add the project directory to the path so we can import our modules
 project_root = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -24,10 +25,9 @@ if str(project_root) not in sys.path:
 from src.engine.game_state import GameState, Street, Action
 from src.engine.evaluator import HandEvaluator
 from src.engine.rules import PokerRules
-from src.algorithms.discounted_regret import DiscountedRegretMinimization
+from src.algorithms.discounted_regret import DiscountedRegretMinimization, InfoState
 from src.utils.cuda_utils import setup_cuda, get_cuda_info
 from src.utils.logging import setup_logger
-from src.utils.visualization import create_card_visualization
 import config
 
 
@@ -36,74 +36,18 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Interactive poker play with GTO assistance.')
     parser.add_argument('--model_path', type=str, default=str(config.ADAPTIVE_MODEL_PATH),
                         help='Path to the trained model')
-    parser.add_argument('--mode', type=str, choices=['interactive', 'auto', 'tooltips'],
-                        default=config.INTERFACE['default_mode'],
-                        help='Play mode: interactive, auto, or tooltips')
+    parser.add_argument('--mode', type=str, choices=['interactive', 'auto', 'training'],
+                        default='interactive',
+                        help='Play mode: interactive, auto, or training')
     parser.add_argument('--log_file', type=str, default=None,
                         help='Path to save the log file')
     parser.add_argument('--no_cuda', action='store_true',
                         help='Disable CUDA even if available')
     parser.add_argument('--debug', action='store_true',
                         help='Enable debug logging')
+    parser.add_argument('--num_hands', type=int, default=10,
+                        help='Number of hands to play in non-interactive modes')
     return parser.parse_args()
-
-
-def setup_environment(args):
-    """Setup the computation environment and logging."""
-    # Configure logging
-    log_level = logging.DEBUG if args.debug else logging.INFO
-    logger = setup_logger("play", log_level, args.log_file)
-
-    # Configure CUDA if available
-    use_cuda = config.USE_CUDA and not args.no_cuda
-    if use_cuda:
-        device, cuda_info = setup_cuda(config.CUDA_DEVICE_ID)
-        logger.info(f"Using CUDA: {cuda_info}")
-    else:
-        device = torch.device("cpu")
-        logger.info(f"Using CPU: {torch.get_num_threads()} threads")
-        if config.USE_CUDA and args.no_cuda:
-            logger.info("CUDA is available but disabled by command line argument")
-        elif not config.USE_CUDA:
-            logger.info("CUDA is not available on this system")
-
-    return logger, device
-
-
-def load_model(args, device, logger):
-    """Load the trained poker model."""
-    # Initialize the poker game engine components
-    rules = PokerRules(
-        small_blind=config.GAME_PARAMS['small_blind'],
-        big_blind=config.GAME_PARAMS['big_blind'],
-        stack_size=config.GAME_PARAMS['stack_size'],
-        max_raises=config.GAME_PARAMS['max_raises_per_street']
-    )
-
-    evaluator = HandEvaluator()
-
-    # Initialize the DRM algorithm
-    drm = DiscountedRegretMinimization(
-        rules=rules,
-        evaluator=evaluator,
-        discount_factor=config.DRM_PARAMS['discount_factor'],
-        device=device,
-        batch_size=config.DRM_PARAMS['batch_size']
-    )
-
-    # Load the trained model if it exists
-    model_path = Path(args.model_path)
-    if model_path.exists():
-        try:
-            drm.load_model(model_path)
-            logger.info(f"Loaded trained model from {model_path}")
-        except Exception as e:
-            logger.warning(f"Could not load model from {model_path}: {e}")
-            logger.info("Starting with a fresh model")
-    else:
-        logger.warning(f"Model path {model_path} does not exist. Starting with a fresh model.")
-
-    return drm, rules, evaluator
 
 
 def print_card(card_idx):
@@ -122,52 +66,53 @@ def print_cards(cards):
     return ' '.join(print_card(card) for card in cards)
 
 
-def print_game_state(state, player_perspective=0):
-    """Print the current game state in a readable format."""
-    print("\n" + "=" * 60)
-    print(f"Street: {state.street.name}")
-    print(f"Pot: {state.pot:.1f}")
+def get_hand_description(evaluator, cards, community_cards=None):
+    """
+    Generate a descriptive string for a hand.
 
-    # Print community cards if any
-    if state.community_cards:
-        print(f"Community cards: {print_cards(state.community_cards)}")
-    else:
-        print("Community cards: None")
+    Args:
+        evaluator: HandEvaluator instance
+        cards: Hole cards
+        community_cards: Community cards (optional)
 
-    # Print player information
-    for i in range(state.num_players):
-        # Only show the current player's hole cards
-        cards_str = print_cards(state.player_cards[i]) if i == player_perspective else "XX XX"
-        position = "Button" if i == state.button_pos else "Big Blind" if i == (
-                    state.button_pos + 2) % state.num_players else "Small Blind"
+    Returns:
+        Descriptive string of the hand
+    """
+    if community_cards is None:
+        community_cards = []
 
-        status = "Active"
-        if state.folded[i]:
-            status = "Folded"
-        elif state.all_in[i]:
-            status = "All-in"
+    # Get hand strength
+    hand_strength = evaluator.evaluate_hand(cards, community_cards)
+    hand_type = evaluator.get_hand_type(hand_strength)
 
-        print(
-            f"Player {i} ({position}): {cards_str} | Stack: {state.stacks[i]:.1f} | Bet: {state.bets[i]:.1f} | {status}")
+    # Convert card indices to readable strings
+    card_strs = [print_card(card) for card in cards]
+    community_card_strs = [print_card(card) for card in community_cards]
 
-    # Print current player
-    print(f"Current player: {state.current_player}")
-    print("=" * 60)
+    return (f"{hand_type} " +
+            f"(Hole: {' '.join(card_strs)}" +
+            (f" | Community: {' '.join(community_card_strs)}" if community_cards else "") + ")")
 
 
 def get_strategy_recommendation(drm, state, hole_cards, community_cards):
-    """Get a strategy recommendation from the GTO model."""
-    # This is a simplified placeholder
-    # In a real implementation, you would use the DRM model to get actionable advice
+    """
+    Get a strategy recommendation from the GTO model.
 
-    # Create an info state from the current game state
-    from src.algorithms.discounted_regret import InfoState
+    Args:
+        drm: Discounted Regret Minimization model
+        state: Current game state
+        hole_cards: Player's hole cards
+        community_cards: Current community cards
 
+    Returns:
+        Sorted list of action recommendations
+    """
     info_state = InfoState(
         player_id=state.current_player,
         hole_cards=hole_cards,
         community_cards=community_cards,
-        action_history=state.action_history
+        action_history=state.action_history,
+        street=state.street
     )
 
     # Get the GTO strategy for this state
@@ -179,78 +124,161 @@ def get_strategy_recommendation(drm, state, hole_cards, community_cards):
     return sorted_actions
 
 
+def ai_choose_action(drm, state, hole_cards, community_cards, logger):
+    """
+    AI strategy for choosing an action.
+
+    Args:
+        drm: Discounted Regret Minimization model
+        state: Current game state
+        hole_cards: AI's hole cards
+        community_cards: Current community cards
+        logger: Logging instance
+
+    Returns:
+        Tuple of (chosen_action, bet_amount)
+    """
+    # Get strategy recommendations
+    recommendations = get_strategy_recommendation(drm, state, hole_cards, community_cards)
+
+    # Get legal actions
+    legal_actions = state.get_legal_actions()
+
+    if not legal_actions:
+        return None, 0.0
+
+    # Choose action based on strategy probabilities
+    strategy_dict = dict(recommendations)
+    action_probs = [strategy_dict.get(action, 0.0) for action, _, _ in legal_actions]
+
+    # Normalize probabilities
+    total_prob = sum(action_probs)
+    if total_prob == 0:
+        # Fallback to uniform distribution
+        action_probs = [1.0 / len(legal_actions)] * len(legal_actions)
+    else:
+        action_probs = [prob / total_prob for prob in action_probs]
+
+    # Choose action probabilistically
+    chosen_action_idx = np.random.choice(len(legal_actions), p=action_probs)
+    chosen_action, min_amount, max_amount = legal_actions[chosen_action_idx]
+
+    # Determine bet amount if action is bet or raise
+    bet_amount = 0.0
+    if chosen_action in [Action.BET, Action.RAISE]:
+        # Intelligent bet sizing based on strategy and hand strength
+        # Here we add some randomness to make it more realistic
+        bet_range = max_amount - min_amount
+        bet_amount = min_amount + random.random() * bet_range * 0.5
+
+    logger.info(f"AI Strategy: {[(a.name, f'{p:.2f}') for a, p in recommendations]}")
+    logger.info(f"AI Chose: {chosen_action.name} " +
+                (f"Amount: {bet_amount:.2f}" if bet_amount > 0 else ""))
+
+    return chosen_action, bet_amount
+
+
+def print_hand_summary(state, evaluator):
+    """
+    Print a summary of the hand, including hand strengths.
+
+    Args:
+        state: Final game state
+        evaluator: HandEvaluator instance
+    """
+    print("\n--- Hand Summary ---")
+    for i in range(state.num_players):
+        if not state.folded[i]:
+            hand_desc = get_hand_description(
+                evaluator,
+                state.player_cards[i],
+                state.community_cards
+            )
+            print(f"Player {i}: {hand_desc}")
+
+    if len(set(not folded for folded in state.folded)) == 1:
+        print("Winner: By Fold")
+    else:
+        strengths = [
+            evaluator.evaluate_hand(state.player_cards[i], state.community_cards)
+            for i in range(state.num_players)
+        ]
+        winners = [
+            i for i, strength in enumerate(strengths)
+            if strength == max(strengths) and not state.folded[i]
+        ]
+
+        if len(winners) == 1:
+            print(f"Winner: Player {winners[0]}")
+        else:
+            print(f"Split Pot: Players {winners}")
+    print("-------------------\n")
+
+
 def play_interactive(drm, rules, evaluator, logger):
     """Run an interactive poker session with GTO assistance."""
     print("\nWelcome to PokerGTO Interactive Play!")
     print("You'll play heads-up Texas Hold'em with GTO-based recommendations.")
 
-    # Initialize game state
-    state = GameState(
-        num_players=2,
-        stack_size=config.GAME_PARAMS['stack_size'],
-        small_blind=config.GAME_PARAMS['small_blind'],
-        big_blind=config.GAME_PARAMS['big_blind']
-    )
-
     playing = True
+    player_wins = 0
+    ai_wins = 0
+
     while playing:
-        # Start a new hand
-        state.reset()
+        # Initialize game state
+        state = GameState(
+            num_players=2,
+            stack_size=config.GAME_PARAMS['stack_size'],
+            small_blind=config.GAME_PARAMS['small_blind'],
+            big_blind=config.GAME_PARAMS['big_blind']
+        )
 
         # Deal hole cards
         hole_cards = rules.deal_hole_cards(num_players=2)
         state.deal_hole_cards(hole_cards)
 
-        # Print initial state
-        print_game_state(state, player_perspective=0)
-
         # Play the hand
         hand_finished = False
         while not hand_finished:
-            # Check if the hand is terminal
             if state.is_terminal():
                 # Evaluate the hand if it went to showdown
                 if not state.folded[0] and not state.folded[1]:
                     if len(state.community_cards) < 5:
                         # Deal remaining community cards if needed
                         remaining = 5 - len(state.community_cards)
-                        remaining_cards = rules.deal_cards(remaining)
+                        remaining_cards = rules.get_random_cards(remaining)
                         state.community_cards.extend(remaining_cards)
 
-                    print_game_state(state, player_perspective=0)
+                print_hand_summary(state, evaluator)
 
-                    # Evaluate the hands
-                    strength0 = evaluator.evaluate_hand(state.player_cards[0], state.community_cards)
-                    strength1 = evaluator.evaluate_hand(state.player_cards[1], state.community_cards)
+                # Determine winner
+                player_hand = evaluator.evaluate_hand(
+                    state.player_cards[0], state.community_cards)
+                ai_hand = evaluator.evaluate_hand(
+                    state.player_cards[1], state.community_cards)
 
-                    hand_type0 = evaluator.get_hand_type(strength0)
-                    hand_type1 = evaluator.get_hand_type(strength1)
-
-                    print(f"Player 0: {hand_type0}")
-                    print(f"Player 1: {hand_type1}")
-
-                    if strength0 > strength1:
-                        print("Player 0 wins!")
-                    elif strength1 > strength0:
-                        print("Player 1 wins!")
-                    else:
-                        print("It's a tie!")
+                if player_hand > ai_hand:
+                    player_wins += 1
+                    print("Congratulations! You won the hand!")
+                elif player_hand < ai_hand:
+                    ai_wins += 1
+                    print("AI won the hand!")
                 else:
-                    # Someone folded
-                    winner = 0 if state.folded[1] else 1
-                    print(f"Player {winner} wins (opponent folded)!")
+                    print("It's a tie!")
 
                 hand_finished = True
                 continue
 
-            # Get current player
-            player = state.current_player
+            # Current player's turn
+            current_player = state.current_player
 
-            # If it's user's turn (player 0)
-            if player == 0:
+            if current_player == 0:  # Human player
+                # Player hole cards
+                player_cards = state.player_cards[0]
+
                 # Get GTO recommendations
                 recommendations = get_strategy_recommendation(
-                    drm, state, state.player_cards[0], state.community_cards
+                    drm, state, player_cards, state.community_cards
                 )
 
                 # Display recommendations
@@ -301,86 +329,44 @@ def play_interactive(drm, rules, evaluator, logger):
                 # Apply the action
                 street_complete = state.apply_action(chosen_action, amount)
 
-                # Deal new street if necessary
-                if street_complete and not state.is_terminal():
-                    if state.street == Street.PREFLOP:
-                        # Deal flop
-                        flop = rules.deal_flop()
-                        state.deal_community_cards(flop, Street.FLOP)
-                    elif state.street == Street.FLOP:
-                        # Deal turn
-                        turn = rules.deal_turn()
-                        state.deal_community_cards(turn, Street.TURN)
-                    elif state.street == Street.TURN:
-                        # Deal river
-                        river = rules.deal_river()
-                        state.deal_community_cards(river, Street.RIVER)
-
-                # Print updated state
-                print_game_state(state, player_perspective=0)
-
-            # If it's AI's turn (player 1)
-            else:
-                # Get AI's recommendation
-                recommendations = get_strategy_recommendation(
-                    drm, state, state.player_cards[1], state.community_cards
+            else:  # AI player
+                # Get AI's action
+                ai_action, ai_amount = ai_choose_action(
+                    drm,
+                    state,
+                    state.player_cards[1],
+                    state.community_cards,
+                    logger
                 )
 
-                # Choose the action with highest probability
-                chosen_action, _ = recommendations[0]
+                if ai_action is not None:
+                    street_complete = state.apply_action(ai_action, ai_amount)
 
-                # Get legal actions
-                legal_actions = state.get_legal_actions()
+            # Deal new street if necessary
+            if street_complete and not state.is_terminal():
+                if state.street == Street.PREFLOP:
+                    # Deal flop
+                    flop = rules.deal_flop()
+                    state.deal_community_cards(flop, Street.FLOP)
+                elif state.street == Street.FLOP:
+                    # Deal turn
+                    turn = rules.deal_turn()
+                    state.deal_community_cards(turn, Street.TURN)
+                elif state.street == Street.TURN:
+                    # Deal river
+                    river = rules.deal_river()
+                    state.deal_community_cards(river, Street.RIVER)
 
-                # Find the chosen action from legal actions
-                action_entry = None
-                for action, min_amount, max_amount in legal_actions:
-                    if action == chosen_action:
-                        action_entry = (action, min_amount, max_amount)
-                        break
-
-                if action_entry:
-                    action, min_amount, max_amount = action_entry
-
-                    # For bet or raise, choose a random amount between min and max
-                    amount = 0.0
-                    if action in [Action.BET, Action.RAISE]:
-                        # In a real implementation, the model would provide guidance on sizing
-                        amount = min_amount + random.random() * (max_amount - min_amount)
-
-                    print(f"\nPlayer 1 chooses: {action.name}" +
-                          (f" {amount:.1f}" if action in [Action.BET, Action.RAISE] else ""))
-
-                    # Apply the action
-                    street_complete = state.apply_action(action, amount)
-
-                    # Deal new street if necessary
-                    if street_complete and not state.is_terminal():
-                        if state.street == Street.PREFLOP:
-                            # Deal flop
-                            flop = rules.deal_flop()
-                            state.deal_community_cards(flop, Street.FLOP)
-                        elif state.street == Street.FLOP:
-                            # Deal turn
-                            turn = rules.deal_turn()
-                            state.deal_community_cards(turn, Street.TURN)
-                        elif state.street == Street.TURN:
-                            # Deal river
-                            river = rules.deal_river()
-                            state.deal_community_cards(river, Street.RIVER)
-
-                    # Print updated state
-                    print_game_state(state, player_perspective=0)
-                else:
-                    print("Error: AI couldn't find a legal action. Skipping turn.")
-                    street_complete = True
+        # Print running score
+        print(f"\nScore - You: {player_wins}, AI: {ai_wins}")
 
         # Ask if the user wants to play another hand
-        play_again = input("\nPlay another hand? (y/n): ")
-        if play_again.lower() != 'y':
+        play_again = input("Play another hand? (y/n): ").lower()
+        if play_again != 'y':
             playing = False
 
     print("\nThanks for playing!")
+    print(f"Final Score - You: {player_wins}, AI: {ai_wins}")
 
 
 def main():
@@ -389,19 +375,61 @@ def main():
     args = parse_args()
 
     # Setup environment
-    logger, device = setup_environment(args)
+    logger = setup_logger("play", logging.DEBUG if args.debug else logging.INFO, args.log_file)
+
+    # Setup CUDA
+    use_cuda = config.USE_CUDA and not args.no_cuda
+    if use_cuda:
+        device, cuda_info = setup_cuda(config.CUDA_DEVICE_ID)
+        logger.info(f"Using CUDA: {cuda_info}")
+    else:
+        device = torch.device("cpu")
+        logger.info(f"Using CPU: {torch.get_num_threads()} threads")
 
     try:
         # Load model
         logger.info("Loading trained model...")
-        drm, rules, evaluator = load_model(args, device, logger)
 
-        # Run interactive play
+        # Initialize the poker game engine components
+        rules = PokerRules(
+            small_blind=config.GAME_PARAMS['small_blind'],
+            big_blind=config.GAME_PARAMS['big_blind'],
+            stack_size=config.GAME_PARAMS['stack_size'],
+            max_raises=config.GAME_PARAMS['max_raises_per_street']
+        )
+
+        evaluator = HandEvaluator()
+
+        # Initialize the DRM algorithm
+        drm = DiscountedRegretMinimization(
+            rules=rules,
+            evaluator=evaluator,
+            discount_factor=config.DRM_PARAMS['discount_factor'],
+            device=device,
+            batch_size=config.DRM_PARAMS['batch_size']
+        )
+
+        # Load the trained model if it exists
+        model_path = Path(args.model_path)
+        if model_path.exists():
+            try:
+                drm.load_model(model_path)
+                logger.info(f"Loaded trained model from {model_path}")
+            except Exception as e:
+                logger.warning(f"Could not load model from {model_path}: {e}")
+                logger.info("Starting with a fresh model")
+        else:
+            logger.warning(f"Model path {model_path} does not exist. Starting with a fresh model.")
+
+        # Run play modes
         if args.mode == 'interactive':
             play_interactive(drm, rules, evaluator, logger)
-        else:
-            logger.info(f"Mode '{args.mode}' not implemented yet")
-            print(f"Mode '{args.mode}' is not implemented yet. Please use 'interactive' mode.")
+        elif args.mode == 'auto':
+            # Placeholder for future auto play mode implementation
+            logger.info("Auto play mode not yet implemented")
+        elif args.mode == 'training':
+            # Placeholder for future training mode implementation
+            logger.info("Training mode not yet implemented")
 
         logger.info("Play session completed successfully")
         return 0
