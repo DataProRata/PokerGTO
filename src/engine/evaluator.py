@@ -125,9 +125,23 @@ class HandEvaluator:
         # Combine hole cards and community cards
         all_cards = hole_cards + community_cards
 
-        # Check for valid input
+        # Handle case with insufficient cards (early game states)
         if len(all_cards) < 5:
-            raise ValueError("Need at least 5 cards to evaluate a hand")
+            # For incomplete hands, use a simple ranking based on the highest cards
+            # This is a placeholder that doesn't capture real poker hand rankings
+            # but allows the algorithm to continue
+            ranks = [self.card_to_rank[card] for card in all_cards]
+            ranks.sort(reverse=True)  # Sort in descending order
+
+            # Calculate a score based on the highest cards
+            # This doesn't generate realistic hand strengths but provides a reasonable
+            # relative ranking for the algorithm to work with
+            value = 0
+            for i, rank in enumerate(ranks[:min(5, len(ranks))]):
+                value += rank * (13 ** (4 - i))
+
+            # Return a low strength value (lower than any real 5-card hand)
+            return value
 
         # Count ranks and suits
         rank_counts = [0] * 13
