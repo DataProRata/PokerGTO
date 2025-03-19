@@ -1,231 +1,261 @@
 #!/usr/bin/env python
 """
-train.py - Train a poker AI model against the Slumbot API
-
-This script loads a pre-trained DRM model and further trains it by playing
-against the Slumbot API. The model adapts its strategy based on gameplay results.
+Collaborative Training Script for Poker AI Models
+Implements advanced multi-model training with knowledge transfer
 """
 
 import os
 import sys
 import time
-import argparse
-import logging
+import random
 import numpy as np
 import torch
+from typing import List, Dict, Any
 from pathlib import Path
-from tqdm import tqdm
 
-# Add the project directory to the path so we can import our modules
-project_root = Path(os.path.dirname(os.path.abspath(__file__)))
-if str(project_root) not in sys.path:
-    sys.path.append(str(project_root))
+# Add project root to path
+project_root = Path(__file__).parent
+sys.path.append(str(project_root))
 
+from src.algorithms.collaborative_drm import CollaborativeDRM
+from src.api.slumbot import SlumbotClient
 from src.engine.game_state import GameState
 from src.engine.evaluator import HandEvaluator
 from src.engine.rules import PokerRules
-from src.algorithms.discounted_regret import DiscountedRegretMinimization
-from src.utils.cuda_utils import setup_cuda, get_cuda_info
-from src.utils.logging import setup_logger
-from src.utils.visualization import plot_training_progress
+from src.utils.knowledge_transfer import KnowledgeTransferManager
 import config
+import logging
 
 
-def parse_args():
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description='Train a poker AI model against the Slumbot API.')
-    parser.add_argument('--model_path', type=str, default=str(config.DRM_MODEL_PATH),
-                        help='Path to the pre-trained DRM model')
-    parser.add_argument('--games', type=int, default=config.TRAINING_PARAMS['num_games'],
-                        help='Number of games to play against Slumbot')
-    parser.add_argument('--save_path', type=str, default=str(config.ADAPTIVE_MODEL_PATH),
-                        help='Path to save the trained model')
-    parser.add_argument('--log_file', type=str, default=None,
-                        help='Path to save the log file')
-    parser.add_argument('--save_interval', type=int, default=config.TRAINING_PARAMS['save_interval'],
-                        help='Interval to save the model')
-    parser.add_argument('--eval_interval', type=int, default=config.TRAINING_PARAMS['eval_interval'],
-                        help='Interval to evaluate and report progress')
-    parser.add_argument('--no_cuda', action='store_true',
-                        help='Disable CUDA even if available')
-    parser.add_argument('--debug', action='store_true',
-                        help='Enable debug logging')
-    return parser.parse_args()
+class CollaborativeTrainer:
+    def __init__(
+            self,
+            num_models: int = 6,
+            games_per_model: int = 1000,
+            knowledge_transfer_frequency: int = 100
+    ):
+        """
+        Initialize collaborative training system.
 
+        Args:
+            num_models: Number of models to train simultaneously
+            games_per_model: Number of games each model will play
+            knowledge_transfer_frequency: How often to perform knowledge transfer
+        """
+        # Logging setup
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s - %(levelname)s: %(message)s'
+        )
+        self.logger = logging.getLogger(__name__)
 
-def setup_environment(args):
-    """Setup the computation environment and logging."""
-    # Configure logging
-    log_level = logging.DEBUG if args.debug else logging.INFO
-    logger = setup_logger("train", log_level, args.log_file)
+        # Game and learning components
+        self.rules = PokerRules(
+            small_blind=config.GAME_PARAMS['small_blind'],
+            big_blind=config.GAME_PARAMS['big_blind'],
+            stack_size=config.GAME_PARAMS['stack_size']
+        )
+        self.evaluator = HandEvaluator()
 
-    # Configure CUDA if available
-    use_cuda = config.USE_CUDA and not args.no_cuda
-    if use_cuda:
-        device, cuda_info = setup_cuda(config.CUDA_DEVICE_ID)
-        logger.info(f"Using CUDA: {cuda_info}")
-    else:
-        device = torch.device("cpu")
-        logger.info(f"Using CPU: {torch.get_num_threads()} threads")
-        if config.USE_CUDA and args.no_cuda:
-            logger.info("CUDA is available but disabled by command line argument")
-        elif not config.USE_CUDA:
-            logger.info("CUDA is not available on this system")
+        # Knowledge transfer manager
+        self.knowledge_manager = KnowledgeTransferManager()
 
-    return logger, device
+        # Training parameters
+        self.num_models = num_models
+        self.games_per_model = games_per_model
+        self.knowledge_transfer_frequency = knowledge_transfer_frequency
 
+        # Slumbot client for training
+        self.slumbot_client = SlumbotClient(
+            base_url=config.SLUMBOT_API['base_url']
+        )
 
-def load_model(args, device, logger):
-    """Load the pre-trained DRM model."""
-    # Initialize the poker game engine components
-    rules = PokerRules(
-        small_blind=config.GAME_PARAMS['small_blind'],
-        big_blind=config.GAME_PARAMS['big_blind'],
-        stack_size=config.GAME_PARAMS['stack_size'],
-        max_raises=config.GAME_PARAMS['max_raises_per_street']
-    )
+        # Initialize models with diverse initial conditions
+        self.models = self._create_diverse_models()
 
-    evaluator = HandEvaluator()
+        # Output directory for trained models
+        self.output_dir = Path(config.MODELS_DIR) / 'collaborative_models'
+        self.output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Initialize the DRM algorithm
-    drm = DiscountedRegretMinimization(
-        rules=rules,
-        evaluator=evaluator,
-        discount_factor=config.DRM_PARAMS['discount_factor'],
-        device=device,
-        batch_size=config.DRM_PARAMS['batch_size']
-    )
+    def _create_diverse_models(self) -> List[CollaborativeDRM]:
+        """
+        Create a diverse set of initial models.
 
-    # Load the pre-trained model if it exists
-    model_path = Path(args.model_path)
-    if model_path.exists():
-        try:
-            drm.load_model(model_path)
-            logger.info(f"Loaded pre-trained model from {model_path}")
-        except Exception as e:
-            logger.warning(f"Could not load model from {model_path}: {e}")
-            logger.info("Starting with a fresh model")
-    else:
-        logger.warning(f"Model path {model_path} does not exist. Starting with a fresh model.")
+        Returns:
+            List of initialized models
+        """
+        models = []
+        for _ in range(self.num_models):
+            model = CollaborativeDRM(
+                rules=self.rules,
+                evaluator=self.evaluator,
+                discount_factor=random.uniform(0.9, 0.99),
+                learning_rate=random.uniform(0.001, 0.1),
+                exploration_factor=random.uniform(0.1, 0.5)
+            )
+            models.append(model)
+        return models
 
-    return drm
+    def train(self):
+        """
+        Collaborative training process.
+        """
+        self.logger.info(f"Starting collaborative training with {self.num_models} models")
 
+        # Training loop
+        for game_round in range(1, self.games_per_model + 1):
+            # Parallel game simulation for all models
+            round_results = self._simulate_round()
 
-def train_model(drm, args, logger):
-    """Train the model by playing against the Slumbot API."""
-    logger.info(f"Starting training for {args.games} games against Slumbot")
+            # Periodic knowledge transfer
+            if game_round % self.knowledge_transfer_frequency == 0:
+                self._perform_knowledge_transfer(round_results)
 
-    # Create output directory if it doesn't exist
-    save_path = Path(args.save_path)
-    save_path.mkdir(parents=True, exist_ok=True)
+            # Periodic logging and model saving
+            if game_round % 100 == 0:
+                self._log_round_summary(game_round, round_results)
+                self._save_models(game_round)
 
-    # Initialize tracking variables
-    start_time = time.time()
-    training_history = {
-        'winnings': [],
-        'win_rate': [],
-        'exploitability': []
-    }
-    best_win_rate = -float('inf')
+        # Final model saving and statistics
+        self._save_final_models()
+        self._generate_training_report()
 
-    # Progress bar
-    pbar = tqdm(range(1, args.games + 1), desc="Training against Slumbot")
+    def _simulate_round(self) -> List[Dict[str, Any]]:
+        """
+        Simulate a round of games for all models.
 
-    # Placeholder for Slumbot API implementation
-    # In a real implementation, you would:
-    # 1. Initialize a SlumbotClient
-    # 2. Play games against  Slumbot
-    # 3. Update the model based on game results
+        Returns:
+            List of game results for each model
+        """
+        round_results = []
 
-    # Simulate training with dummy data for now
-    for game in pbar:
-        # Simulate playing a game against Slumbot
-        # In a real implementation, this would involve API calls
+        for model_index, model in enumerate(self.models):
+            try:
+                # Start a new hand against Slumbot
+                hand_result = self._play_against_slumbot(model)
 
-        # Dummy data - would be real results from Slumbot games
-        win_amount = np.random.normal(0.1, 1.0)  # Mean small positive win
-        training_history['winnings'].append(win_amount)
+                # Update model's collaborative score
+                model.collaborative_score += hand_result['win_value']
 
-        # Calculate running win rate
-        win_rate = sum(training_history['winnings']) / game
-        training_history['win_rate'].append(win_rate)
+                # Store round result
+                round_results.append({
+                    'model_index': model_index,
+                    'result': hand_result,
+                    'model': model
+                })
 
-        # Update the model (placeholder)
-        # In a real implementation, this would update the model based on game results
+            except Exception as e:
+                self.logger.error(f"Error in game for model {model_index}: {e}")
 
-        # Periodically compute exploitability
-        if game % args.eval_interval == 0:
-            # In a real implementation, this would be an actual evaluation
-            exploitability = 1.0 / np.sqrt(game)  # Dummy value that decreases with more games
-            training_history['exploitability'].append(exploitability)
+        return round_results
 
-            elapsed = time.time() - start_time
-            games_per_second = game / elapsed
+    def _play_against_slumbot(self, model: CollaborativeDRM) -> Dict[str, Any]:
+        """
+        Play a hand against Slumbot with the given model.
 
-            # Update progress bar
-            pbar.set_postfix({
-                'Win Rate': f"{win_rate:.3f}",
-                'Expl': f"{exploitability:.6f}",
-                'Games/s': f"{games_per_second:.1f}"
-            })
+        Args:
+            model: Poker AI model to play
 
-            logger.info(f"Game {game}/{args.games}: "
-                        f"Win Rate = {win_rate:.3f}, "
-                        f"Exploitability = {exploitability:.6f}")
+        Returns:
+            Dictionary of game result
+        """
+        # Start a new hand
+        hand_info = self.slumbot_client.start_new_hand()
 
-            # Check if this is the best model so far
-            if win_rate > best_win_rate:
-                best_win_rate = win_rate
-                drm.save_model(save_path / "best_model")
-                logger.info(f"New best model saved with win rate {best_win_rate:.3f}")
+        # Strategy function using the model
+        def model_strategy(state: Dict[str, Any]) -> Tuple[str, Optional[float]]:
+            # Convert Slumbot state to model's representation
+            from src.algorithms.discounted_regret import InfoState
+            info_state = self._convert_state_to_info_state(state)
 
-        # Periodically save the model
-        if game % args.save_interval == 0:
-            checkpoint_path = save_path / f"checkpoint_{game}"
-            drm.save_model(checkpoint_path)
+            # Get model's strategy
+            strategy = model.get_strategy(info_state)
 
-            # Also save visualization
-            plot_training_progress(training_history, save_path / f"training_progress_{game}.png")
+            # Convert strategy to Slumbot action
+            legal_actions = state['legal_actions']
+            chosen_action = self._choose_action_from_strategy(strategy, legal_actions)
 
-    # Save the final model
-    drm.save_model(save_path / "final_model")
-    logger.info(f"Final model saved with win rate {win_rate:.3f}")
+            return chosen_action
 
-    # Generate and save final visualizations
-    plot_training_progress(training_history, save_path / "training_progress_final.png")
+        # Play the hand
+        result = self.slumbot_client.play_hand(model_strategy)
 
-    # Report training stats
-    total_time = time.time() - start_time
-    logger.info(f"Training completed in {total_time:.2f} seconds")
-    logger.info(f"Final win rate: {win_rate:.3f}")
-    logger.info(f"Models saved to {save_path}")
+        # Compute win value
+        win_value = 1.0 if result.get('winnings', 0) > 0 else 0.0
 
-    return drm
+        return {
+            'win_value': win_value,
+            'hand_details': result
+        }
 
+    def _convert_state_to_info_state(self, slumbot_state: Dict[str, Any]) -> 'InfoState':
+        """
+        Convert Slumbot state to model's InfoState.
 
-def main():
-    """Main function to run the training."""
-    # Parse arguments
-    args = parse_args()
+        Args:
+            slumbot_state: State from Slumbot
 
-    # Setup environment
-    logger, device = setup_environment(args)
+        Returns:
+            Converted InfoState
+        """
+        # Implement conversion logic
+        pass  # Placeholder for actual implementation
 
-    try:
-        # Load model
-        logger.info("Loading pre-trained model...")
-        drm = load_model(args, device, logger)
+    def _choose_action_from_strategy(
+            self,
+            strategy: Dict[Action, float],
+            legal_actions: List[Tuple[str, float]]
+    ) -> Tuple[str, Optional[float]]:
+        """
+        Choose an action based on the model's strategy.
 
-        # Train model
-        trained_model = train_model(drm, args, logger)
+        Args:
+            strategy: Model's action strategy
+            legal_actions: Available actions
 
-        logger.info("Training completed successfully")
-        return 0
+        Returns:
+            Chosen action and optional bet amount
+        """
+        # Implement action selection logic
+        pass  # Placeholder for actual implementation
 
-    except Exception as e:
-        logger.exception(f"Error during training: {e}")
-        return 1
+    def _perform_knowledge_transfer(self, round_results: List[Dict[str, Any]]):
+        """
+        Perform knowledge transfer between models.
 
+        Args:
+            round_results: Results from the current round
+        """
+        # Sort models by performance
+        sorted_models = sorted(
+            round_results,
+            key=lambda x: x['result']['win_value'],
+            reverse=True
+        )
 
-if __name__ == "__main__":
-    sys.exit(main())
+        # Transfer knowledge from top performers
+        for i in range(len(sorted_models)):
+            for j in range(i + 1, len(sorted_models)):
+                source_model = sorted_models[i]['model']
+                target_model = sorted_models[j]['model']
+
+                self.knowledge_manager.transfer_knowledge(
+                    source_model,
+                    target_model
+                )
+
+    def _log_round_summary(self, game_round: int, round_results: List[Dict[str, Any]]):
+        """
+        Log summary of the training round.
+
+        Args:
+            game_round: Current game round
+            round_results: Results from the current round
+        """
+        win_rates = [result['result']['win_value'] for result in round_results]
+
+        self.logger.info(f"Round {game_round} Summary:")
+        self.logger.info(f"  Average Win Rate: {np.mean(win_rates):.2f}")
+        self.logger.info(f"  Win Rate Std Dev: {np.std(win_rates):.2f}")
+        self.logger.info(f"  Best Win Rate: {max(win_rates):.2f}")
+        

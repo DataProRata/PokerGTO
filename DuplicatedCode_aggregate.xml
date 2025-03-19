@@ -1,0 +1,39 @@
+<root>
+<duplicate cost="1" hash="0">
+  <fragment file="file://$PROJECT_DIR$/calculate.py" line="68" start="2988" end="3531" />
+  <fragment file="file://$PROJECT_DIR$/train.py" line="63" start="2600" end="3143" />
+</duplicate>
+<duplicate cost="1" hash="0">
+  <fragment file="file://$PROJECT_DIR$/calculate.py" line="110" start="4329" end="4719" />
+  <fragment file="file://$PROJECT_DIR$/simplified_calculate.py" line="114" start="4110" end="4504" />
+</duplicate>
+<duplicate cost="1" hash="0">
+  <fragment file="file://$PROJECT_DIR$/play.py" line="107" start="3468" end="4215" />
+  <fragment file="file://$PROJECT_DIR$/train.py" line="91" start="3601" end="4348" />
+</duplicate>
+<duplicate cost="1" hash="0">
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" line="163" start="6274" end="7154" />
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" line="180" start="7078" end="7960" />
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" line="96" start="3957" end="4515" />
+</duplicate>
+<duplicate cost="1" hash="0">
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" line="275" start="10703" end="11233" />
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" line="142" start="6036" end="6449" />
+</duplicate>
+<duplicate cost="1" hash="0">
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" line="405" start="16461" end="19790" />
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" line="404" start="17016" end="20345" />
+</duplicate>
+<duplicate cost="1" hash="0">
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" line="538" start="22157" end="22809" />
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" line="571" start="24072" end="24650" />
+</duplicate>
+<duplicate cost="1" hash="0">
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" line="562" start="22865" end="23903" />
+  <fragment file="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" line="590" start="24706" end="25669" />
+</duplicate>
+<duplicate cost="1" hash="0">
+  <fragment file="file://$PROJECT_DIR$/src/utils/logging.py" line="44" start="1131" end="1491" />
+  <fragment file="file://$PROJECT_DIR$/src/utils/logging.py" line="115" start="3308" end="3673" />
+</duplicate>
+</root>

@@ -1,0 +1,230 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>68</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 68-80</description>
+  <highlighted_element>use_cuda = config.USE_CUDA and not args.no_cuda</highlighted_element>
+  <language>Python</language>
+  <offset>4</offset>
+  <length>47</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>110</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 110-120</description>
+  <highlighted_element>logger.info(f&quot;Starting DRM calculation for {args.iterations} iterations&quot;)</highlighted_element>
+  <language>Python</language>
+  <offset>4</offset>
+  <length>73</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/play.py</file>
+  <line>107</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/play.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 107-127</description>
+  <highlighted_element>drm = DiscountedRegretMinimization(</highlighted_element>
+  <language>Python</language>
+  <offset>4</offset>
+  <length>35</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/simplified_calculate.py</file>
+  <line>114</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/simplified_calculate.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 114-124</description>
+  <highlighted_element>logger.info(f&quot;Starting simplified DRM calculation for {args.iterations} iterations&quot;)</highlighted_element>
+  <language>Python</language>
+  <offset>4</offset>
+  <length>84</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret.py</file>
+  <line>163</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 163-184</description>
+  <highlighted_element>&quot;&quot;&quot;</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>3</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret.py</file>
+  <line>275</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 275-287</description>
+  <highlighted_element>strategy_sum = self.strategy_sums[info_state_hash]</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>50</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret.py</file>
+  <line>405</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 405-469</description>
+  <highlighted_element>if not current.pending_actions:</highlighted_element>
+  <language>Python</language>
+  <offset>12</offset>
+  <length>31</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret.py</file>
+  <line>538</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 538-559</description>
+  <highlighted_element>&quot;&quot;&quot;</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>3</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret.py</file>
+  <line>562</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 562-589</description>
+  <highlighted_element>&quot;&quot;&quot;</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>3</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>180</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 180-201</description>
+  <highlighted_element>&quot;&quot;&quot;</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>3</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>404</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 404-468</description>
+  <highlighted_element>if not current.pending_actions:</highlighted_element>
+  <language>Python</language>
+  <offset>12</offset>
+  <length>31</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>571</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 571-587</description>
+  <highlighted_element>&quot;&quot;&quot;Save the DRM model to disk.&quot;&quot;&quot;</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>33</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>590</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 590-612</description>
+  <highlighted_element>&quot;&quot;&quot;Load a DRM model from disk.&quot;&quot;&quot;</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>33</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>96</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 96-108</description>
+  <highlighted_element>&quot;&quot;&quot;Convert regrets to a strategy using regret matching.&quot;&quot;&quot;</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>58</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>142</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 142-152</description>
+  <highlighted_element>strategy_sum = self.strategy_sums[state_key]</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>44</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/logging.py</file>
+  <line>44</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/logging.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 44-53</description>
+  <highlighted_element>if log_file:</highlighted_element>
+  <language>Python</language>
+  <offset>4</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/logging.py</file>
+  <line>115</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/logging.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 115-124</description>
+  <highlighted_element>if log_file:</highlighted_element>
+  <language>Python</language>
+  <offset>4</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/train.py</file>
+  <line>63</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/train.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 63-75</description>
+  <highlighted_element>use_cuda = config.USE_CUDA and not args.no_cuda</highlighted_element>
+  <language>Python</language>
+  <offset>4</offset>
+  <length>47</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/train.py</file>
+  <line>91</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/train.py" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 91-111</description>
+  <highlighted_element>drm = DiscountedRegretMinimization(</highlighted_element>
+  <language>Python</language>
+  <offset>4</offset>
+  <length>35</length>
+</problem>
+</problems>

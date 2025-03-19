@@ -1,0 +1,98 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/README.md</file>
+  <line>223</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/README.md" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>Use an instead of 'a' if the following word starts with a vowel sound, e.g. 'an article', 'an hour'.</description>
+  <highlighted_element>a</highlighted_element>
+  <language>Markdown</language>
+  <offset>73</offset>
+  <length>1</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>62</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>The verb 'set up' is spelled as two words. The noun 'setup' is spelled as one.</description>
+  <highlighted_element>Setup</highlighted_element>
+  <language>Python</language>
+  <offset>7</offset>
+  <length>5</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/simplified_calculate.py</file>
+  <line>63</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/simplified_calculate.py" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>The verb 'set up' is spelled as two words. The noun 'setup' is spelled as one.</description>
+  <highlighted_element>Setup</highlighted_element>
+  <language>Python</language>
+  <offset>7</offset>
+  <length>5</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>76</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>An apostrophe may be missing.</description>
+  <highlighted_element>regrets</highlighted_element>
+  <language>Python</language>
+  <offset>56</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>283</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>It seems that a pronoun is missing.</description>
+  <highlighted_element>If</highlighted_element>
+  <language>Python</language>
+  <offset>14</offset>
+  <length>2</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/cuda_utils.py</file>
+  <line>4</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/cuda_utils.py" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>The verb 'set up' is spelled as two words. The noun 'setup' is spelled as one.</description>
+  <highlighted_element>setup</highlighted_element>
+  <language>Python</language>
+  <offset>34</offset>
+  <length>5</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/cuda_utils.py</file>
+  <line>89</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/cuda_utils.py" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>It appears that the past participle should be used here.</description>
+  <highlighted_element>compute</highlighted_element>
+  <language>Python</language>
+  <offset>58</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/train.py</file>
+  <line>57</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/train.py" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>The verb 'set up' is spelled as two words. The noun 'setup' is spelled as one.</description>
+  <highlighted_element>Setup</highlighted_element>
+  <language>Python</language>
+  <offset>7</offset>
+  <length>5</length>
+</problem>
+</problems>

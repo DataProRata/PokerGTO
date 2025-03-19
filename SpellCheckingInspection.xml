@@ -1,0 +1,1178 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/README.md</file>
+  <line>11</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/README.md" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Hold'em'</description>
+  <highlighted_element>Hold'em</highlighted_element>
+  <language>HTML</language>
+  <offset>58</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/README.md</file>
+  <line>251</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/README.md" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Sandholm'</description>
+  <highlighted_element>Sandholm</highlighted_element>
+  <language>Markdown</language>
+  <offset>63</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/README.md</file>
+  <line>254</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/README.md" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Libratus'</description>
+  <highlighted_element>Libratus</highlighted_element>
+  <language>Markdown</language>
+  <offset>3</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>6</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Hold'em'</description>
+  <highlighted_element>Hold'em</highlighted_element>
+  <language>Python</language>
+  <offset>60</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>119</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>4</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>121</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>9</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>136</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>12</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>161</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Exploitability'</description>
+  <highlighted_element>Exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>26</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>169</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>21</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>171</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>56</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>184</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>41</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>186</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>11</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>187</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>25</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/calculate.py</file>
+  <line>196</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/calculate.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>24</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/config.py</file>
+  <line>93</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/config.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'asctime'</description>
+  <highlighted_element>asctime</highlighted_element>
+  <language>Python</language>
+  <offset>17</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/config.py</file>
+  <line>93</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/config.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'levelname'</description>
+  <highlighted_element>levelname</highlighted_element>
+  <language>Python</language>
+  <offset>42</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/play.py</file>
+  <line>207</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/play.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Hold'em'</description>
+  <highlighted_element>Hold'em</highlighted_element>
+  <language>Python</language>
+  <offset>38</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/poker_qt_gui.py</file>
+  <line>255</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/poker_qt_gui.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'qlineargradient'</description>
+  <highlighted_element>qlineargradient</highlighted_element>
+  <language>Python</language>
+  <offset>28</offset>
+  <length>15</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/setup.py</file>
+  <line>22</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/setup.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pokergto'</description>
+  <highlighted_element>pokergto</highlighted_element>
+  <language>Python</language>
+  <offset>13</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret.py</file>
+  <line>515</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>16</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret.py</file>
+  <line>517</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>20</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret.py</file>
+  <line>519</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Exploitability'</description>
+  <highlighted_element>Exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret.py</file>
+  <line>526</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>25</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>36</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'tensorized'</description>
+  <highlighted_element>tensorized</highlighted_element>
+  <language>Python</language>
+  <offset>72</offset>
+  <length>10</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>64</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'tensorize'</description>
+  <highlighted_element>tensorize</highlighted_element>
+  <language>Python</language>
+  <offset>41</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>205</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'tensorized'</description>
+  <highlighted_element>tensorized</highlighted_element>
+  <language>Python</language>
+  <offset>61</offset>
+  <length>10</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>503</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'subgames'</description>
+  <highlighted_element>subgames</highlighted_element>
+  <language>Python</language>
+  <offset>45</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>508</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'subgames'</description>
+  <highlighted_element>subgames</highlighted_element>
+  <language>Python</language>
+  <offset>62</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>559</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>16</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>560</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>23</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>187</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>188</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>189</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>221</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>17</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>222</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>31</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>225</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>28</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>345</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>26</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>403</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>16</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>404</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>28</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/evaluator.py</file>
+  <line>2</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/evaluator.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Hold'em'</description>
+  <highlighted_element>Hold'em</highlighted_element>
+  <language>Python</language>
+  <offset>41</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>14</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Hold'em'</description>
+  <highlighted_element>Hold'em</highlighted_element>
+  <language>Python</language>
+  <offset>65</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>15</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'PREFLOP'</description>
+  <highlighted_element>PREFLOP</highlighted_element>
+  <language>Python</language>
+  <offset>4</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>22</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Hold'em'</description>
+  <highlighted_element>Hold'em</highlighted_element>
+  <language>Python</language>
+  <offset>62</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>102</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>23</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/rules.py</file>
+  <line>2</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/rules.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Hold'em'</description>
+  <highlighted_element>Hold'em</highlighted_element>
+  <language>Python</language>
+  <offset>17</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/rules.py</file>
+  <line>15</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/rules.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Hold'em'</description>
+  <highlighted_element>Hold'em</highlighted_element>
+  <language>Python</language>
+  <offset>36</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/rules.py</file>
+  <line>131</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/rules.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>41</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/rules.py</file>
+  <line>144</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/rules.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>41</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/rules.py</file>
+  <line>149</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/rules.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Hold'em'</description>
+  <highlighted_element>Hold'em</highlighted_element>
+  <language>Python</language>
+  <offset>25</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/rules.py</file>
+  <line>194</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/rules.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'preflop'</description>
+  <highlighted_element>preflop</highlighted_element>
+  <language>Python</language>
+  <offset>17</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/interface/main_window.py</file>
+  <line>38</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/interface/main_window.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>20</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/interface/main_window.py</file>
+  <line>39</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/interface/main_window.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>29</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/interface/main_window.py</file>
+  <line>142</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/interface/main_window.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/interface/main_window.py</file>
+  <line>142</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/interface/main_window.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>38</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/interface/main_window.py</file>
+  <line>145</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/interface/main_window.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Exploitability'</description>
+  <highlighted_element>Exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>68</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/interface/main_window.py</file>
+  <line>148</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/interface/main_window.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Exploitability'</description>
+  <highlighted_element>Exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>22</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/__init__.py</file>
+  <line>20</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/__init__.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>30</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/logging.py</file>
+  <line>34</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/logging.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'asctime'</description>
+  <highlighted_element>asctime</highlighted_element>
+  <language>Python</language>
+  <offset>11</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/logging.py</file>
+  <line>34</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/logging.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'levelname'</description>
+  <highlighted_element>levelname</highlighted_element>
+  <language>Python</language>
+  <offset>36</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/logging.py</file>
+  <line>104</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/logging.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'asctime'</description>
+  <highlighted_element>asctime</highlighted_element>
+  <language>Python</language>
+  <offset>11</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/logging.py</file>
+  <line>104</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/logging.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'levelname'</description>
+  <highlighted_element>levelname</highlighted_element>
+  <language>Python</language>
+  <offset>36</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>22</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'figsize'</description>
+  <highlighted_element>figsize</highlighted_element>
+  <language>Python</language>
+  <offset>25</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>24</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'labelsize'</description>
+  <highlighted_element>labelsize</highlighted_element>
+  <language>Python</language>
+  <offset>23</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>25</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'titlesize'</description>
+  <highlighted_element>titlesize</highlighted_element>
+  <language>Python</language>
+  <offset>23</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>26</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'labelsize'</description>
+  <highlighted_element>labelsize</highlighted_element>
+  <language>Python</language>
+  <offset>24</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>27</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ytick'</description>
+  <highlighted_element>ytick</highlighted_element>
+  <language>Python</language>
+  <offset>18</offset>
+  <length>5</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>27</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'labelsize'</description>
+  <highlighted_element>labelsize</highlighted_element>
+  <language>Python</language>
+  <offset>24</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>80</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>9</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>80</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>24</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>83</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>13</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>98</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>17</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>99</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>16</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>101</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>15</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>117</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Exploitability'</description>
+  <highlighted_element>Exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>19</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>118</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Exploitability'</description>
+  <highlighted_element>Exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>27</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>156</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Preflop'</description>
+  <highlighted_element>Preflop</highlighted_element>
+  <language>Python</language>
+  <offset>23</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>191</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'suptitle'</description>
+  <highlighted_element>suptitle</highlighted_element>
+  <language>Python</language>
+  <offset>61</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>236</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'suptitle'</description>
+  <highlighted_element>suptitle</highlighted_element>
+  <language>Python</language>
+  <offset>61</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>560</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>18</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>566</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Exploitability'</description>
+  <highlighted_element>Exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>24</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>567</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Exploitability'</description>
+  <highlighted_element>Exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>32</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>574</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'freqs'</description>
+  <highlighted_element>freqs</highlighted_element>
+  <language>Python</language>
+  <offset>11</offset>
+  <length>5</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>580</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Preflop'</description>
+  <highlighted_element>Preflop</highlighted_element>
+  <language>Python</language>
+  <offset>16</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>582</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Preflop'</description>
+  <highlighted_element>Preflop</highlighted_element>
+  <language>Python</language>
+  <offset>28</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/utils/visualization.py</file>
+  <line>588</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/utils/visualization.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'freqs'</description>
+  <highlighted_element>freqs</highlighted_element>
+  <language>Python</language>
+  <offset>20</offset>
+  <length>5</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/tests/test_algorithms.py</file>
+  <line>81</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/tests/test_algorithms.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>13</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/tests/test_algorithms.py</file>
+  <line>82</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/tests/test_algorithms.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>31</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/tests/test_algorithms.py</file>
+  <line>87</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/tests/test_algorithms.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/tests/test_algorithms.py</file>
+  <line>89</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/tests/test_algorithms.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Exploitability'</description>
+  <highlighted_element>Exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>10</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/tests/test_api.py</file>
+  <line>99</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/tests/test_api.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'TJQKA'</description>
+  <highlighted_element>TJQKA</highlighted_element>
+  <language>Python</language>
+  <offset>48</offset>
+  <length>5</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/tests/test_api.py</file>
+  <line>100</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/tests/test_api.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'hdcs'</description>
+  <highlighted_element>hdcs</highlighted_element>
+  <language>Python</language>
+  <offset>48</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/tests/test_api.py</file>
+  <line>115</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/tests/test_api.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'TJQKA'</description>
+  <highlighted_element>TJQKA</highlighted_element>
+  <language>Python</language>
+  <offset>48</offset>
+  <length>5</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/tests/test_api.py</file>
+  <line>116</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/tests/test_api.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'hdcs'</description>
+  <highlighted_element>hdcs</highlighted_element>
+  <language>Python</language>
+  <offset>48</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/train.py</file>
+  <line>127</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/train.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>9</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/train.py</file>
+  <line>156</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/train.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>31</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/train.py</file>
+  <line>159</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/train.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>12</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/train.py</file>
+  <line>160</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/train.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'exploitability'</description>
+  <highlighted_element>exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>30</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/train.py</file>
+  <line>174</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/train.py" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Exploitability'</description>
+  <highlighted_element>Exploitability</highlighted_element>
+  <language>Python</language>
+  <offset>26</offset>
+  <length>14</length>
+</problem>
+</problems>

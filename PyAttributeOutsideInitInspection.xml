@@ -1,0 +1,422 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/poker_qt_gui.py</file>
+  <line>179</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/poker_qt_gui.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute status_label defined outside __init__</description>
+  <highlighted_element>self.status_label</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>17</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/poker_qt_gui.py</file>
+  <line>184</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/poker_qt_gui.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute scoreboard_label defined outside __init__</description>
+  <highlighted_element>self.scoreboard_label</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>21</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/poker_qt_gui.py</file>
+  <line>198</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/poker_qt_gui.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute player_cards_layout defined outside __init__</description>
+  <highlighted_element>self.player_cards_layout</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>24</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/poker_qt_gui.py</file>
+  <line>204</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/poker_qt_gui.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute community_cards_layout defined outside __init__</description>
+  <highlighted_element>self.community_cards_layout</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>27</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/poker_qt_gui.py</file>
+  <line>239</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/poker_qt_gui.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute log_area defined outside __init__</description>
+  <highlighted_element>self.log_area</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>13</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py</file>
+  <line>119</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/discounted_regret_gpu.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute hand_cache defined outside __init__</description>
+  <highlighted_element>self.hand_cache</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>15</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>59</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute card_encodings defined outside __init__</description>
+  <highlighted_element>self.card_encodings</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>64</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute action_encodings defined outside __init__</description>
+  <highlighted_element>self.action_encodings</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>21</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>61</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute stacks defined outside __init__</description>
+  <highlighted_element>self.stacks</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>64</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute pot defined outside __init__</description>
+  <highlighted_element>self.pot</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>65</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute street defined outside __init__</description>
+  <highlighted_element>self.street</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>66</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute current_player defined outside __init__</description>
+  <highlighted_element>self.current_player</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>67</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute button_pos defined outside __init__</description>
+  <highlighted_element>self.button_pos</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>15</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>68</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute last_aggressor defined outside __init__</description>
+  <highlighted_element>self.last_aggressor</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>71</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute bets defined outside __init__</description>
+  <highlighted_element>self.bets</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>72</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute committed defined outside __init__</description>
+  <highlighted_element>self.committed</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>14</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>78</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute action_history defined outside __init__</description>
+  <highlighted_element>self.action_history</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>81</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute community_cards defined outside __init__</description>
+  <highlighted_element>self.community_cards</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>20</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>82</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute player_cards defined outside __init__</description>
+  <highlighted_element>self.player_cards</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>17</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>85</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute folded defined outside __init__</description>
+  <highlighted_element>self.folded</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>86</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute all_in defined outside __init__</description>
+  <highlighted_element>self.all_in</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>105</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute current_player defined outside __init__</description>
+  <highlighted_element>self.current_player</highlighted_element>
+  <language>Python</language>
+  <offset>12</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>117</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute player_cards defined outside __init__</description>
+  <highlighted_element>self.player_cards</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>17</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>128</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute street defined outside __init__</description>
+  <highlighted_element>self.street</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>131</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute bets defined outside __init__</description>
+  <highlighted_element>self.bets</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>137</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute current_player defined outside __init__</description>
+  <highlighted_element>self.current_player</highlighted_element>
+  <language>Python</language>
+  <offset>16</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>212</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute last_aggressor defined outside __init__</description>
+  <highlighted_element>self.last_aggressor</highlighted_element>
+  <language>Python</language>
+  <offset>16</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/rules.py</file>
+  <line>42</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/rules.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute deck defined outside __init__</description>
+  <highlighted_element>self.deck</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/rules.py</file>
+  <line>43</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/rules.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute current_deck defined outside __init__</description>
+  <highlighted_element>self.current_deck</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>17</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/rules.py</file>
+  <line>47</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/rules.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute current_deck defined outside __init__</description>
+  <highlighted_element>self.current_deck</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>17</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/rules.py</file>
+  <line>64</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/rules.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute current_deck defined outside __init__</description>
+  <highlighted_element>self.current_deck</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>17</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/interface/main_window.py</file>
+  <line>66</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/interface/main_window.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute drm defined outside __init__</description>
+  <highlighted_element>self.drm</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/interface/main_window.py</file>
+  <line>100</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/interface/main_window.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute iterations_progress defined outside __init__</description>
+  <highlighted_element>self.iterations_progress</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>24</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/interface/main_window.py</file>
+  <line>107</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/interface/main_window.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute training_log defined outside __init__</description>
+  <highlighted_element>self.training_log</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>17</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/interface/main_window.py</file>
+  <line>131</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/interface/main_window.py" />
+  <problem_class id="PyAttributeOutsideInitInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">An instance attribute is defined outside `__init__`</problem_class>
+  <description>Instance attribute training_worker defined outside __init__</description>
+  <highlighted_element>self.training_worker</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>20</length>
+</problem>
+</problems>

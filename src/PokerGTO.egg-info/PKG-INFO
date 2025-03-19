@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: PokerGTO
+Version: 0.1.0
+Summary: Game Theory Optimal Poker Strategy AI
+Author: Your Name
+Requires-Python: >=3.10
+Requires-Dist: numpy>=2.1.2
+Requires-Dist: torch>=2.6.0
+Requires-Dist: PyQt6>=6.5.0
+Requires-Dist: matplotlib>=3.7.1
+Requires-Dist: requests>=2.32.3
+Requires-Dist: tqdm>=4.65.0

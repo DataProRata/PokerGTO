@@ -1,0 +1,98 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/requirements.txt</file>
+  <line>24</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/requirements.txt" />
+  <problem_class id="UnsatisfiedRequirementInspection" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Requirement is not satisfied</problem_class>
+  <description>Package pypokerengine is not installed</description>
+  <highlighted_element>pypokerengine&gt;=0.4.7</highlighted_element>
+  <language>Requirements</language>
+  <offset>0</offset>
+  <length>20</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/requirements.txt</file>
+  <line>30</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/requirements.txt" />
+  <problem_class id="UnsatisfiedRequirementInspection" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Requirement is not satisfied</problem_class>
+  <description>Package PyQt6 is not installed</description>
+  <highlighted_element>PyQt6&gt;=6.5.0</highlighted_element>
+  <language>Requirements</language>
+  <offset>0</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/requirements.txt</file>
+  <line>84</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/requirements.txt" />
+  <problem_class id="UnsatisfiedRequirementInspection" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Requirement is not satisfied</problem_class>
+  <description>Package pypokerengine is not installed</description>
+  <highlighted_element>pypokerengine&gt;=0.4.7</highlighted_element>
+  <language>Requirements</language>
+  <offset>0</offset>
+  <length>20</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/requirements.txt</file>
+  <line>90</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/requirements.txt" />
+  <problem_class id="UnsatisfiedRequirementInspection" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Requirement is not satisfied</problem_class>
+  <description>Package PyQt6 is not installed</description>
+  <highlighted_element>PyQt6&gt;=6.5.0</highlighted_element>
+  <language>Requirements</language>
+  <offset>0</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/requirements.txt</file>
+  <line>145</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/requirements.txt" />
+  <problem_class id="UnsatisfiedRequirementInspection" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Requirement is not satisfied</problem_class>
+  <description>Package pypokerengine is not installed</description>
+  <highlighted_element>pypokerengine&gt;=0.4.7</highlighted_element>
+  <language>Requirements</language>
+  <offset>0</offset>
+  <length>20</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/requirements.txt</file>
+  <line>151</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/requirements.txt" />
+  <problem_class id="UnsatisfiedRequirementInspection" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Requirement is not satisfied</problem_class>
+  <description>Package PyQt6 is not installed</description>
+  <highlighted_element>PyQt6&gt;=6.5.0</highlighted_element>
+  <language>Requirements</language>
+  <offset>0</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/requirements.txt</file>
+  <line>211</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/requirements.txt" />
+  <problem_class id="UnsatisfiedRequirementInspection" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Requirement is not satisfied</problem_class>
+  <description>Package PyQt6 is not installed</description>
+  <highlighted_element>PyQt6&gt;=6.5.0</highlighted_element>
+  <language>Requirements</language>
+  <offset>0</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/requirements.txt</file>
+  <line>245</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/requirements.txt" />
+  <problem_class id="UnsatisfiedRequirementInspection" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Requirement is not satisfied</problem_class>
+  <description>Package . is not installed</description>
+  <highlighted_element>e .</highlighted_element>
+  <language>Requirements</language>
+  <offset>1</offset>
+  <length>3</length>
+</problem>
+</problems>

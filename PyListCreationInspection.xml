@@ -1,0 +1,50 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>223</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="PyListCreationInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Non-optimal list declaration</problem_class>
+  <description>Multi-step list initialization can be replaced with a list literal</description>
+  <highlighted_element>states = []</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>261</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="PyListCreationInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Non-optimal list declaration</problem_class>
+  <description>Multi-step list initialization can be replaced with a list literal</description>
+  <highlighted_element>states = []</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/algorithms/simplified_drm.py</file>
+  <line>288</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/algorithms/simplified_drm.py" />
+  <problem_class id="PyListCreationInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Non-optimal list declaration</problem_class>
+  <description>Multi-step list initialization can be replaced with a list literal</description>
+  <highlighted_element>states = []</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/src/engine/game_state.py</file>
+  <line>387</line>
+  <module>PokerGTO</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/src/engine/game_state.py" />
+  <problem_class id="PyListCreationInspection" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Non-optimal list declaration</problem_class>
+  <description>Multi-step list initialization can be replaced with a list literal</description>
+  <highlighted_element>features = []</highlighted_element>
+  <language>Python</language>
+  <offset>8</offset>
+  <length>13</length>
+</problem>
+</problems>
