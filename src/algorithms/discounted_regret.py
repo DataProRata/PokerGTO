@@ -10,10 +10,11 @@ import os
 import torch
 import numpy as np
 import logging
-from typing import Dict, List, Tuple, Optional, Set, Any
+from typing import Dict, List, Tuple, Optional, Set, Any, Deque
 from pathlib import Path
 import pickle
 import time
+from collections import deque
 
 from src.engine.game_state import GameState, Street, Action
 from src.engine.evaluator import HandEvaluator
@@ -29,7 +30,7 @@ class InfoState:
     """
 
     def __init__(self, player_id: int, hole_cards: List[int],
-                 community_cards: List[int], action_history: List[Tuple]):
+                community_cards: List[int], action_history: List[Tuple], street: Street):
         """
         Initialize an information state.
 
@@ -38,23 +39,28 @@ class InfoState:
             hole_cards: The player's hole cards
             community_cards: Visible community cards
             action_history: History of actions that led to this state
+            street: Current street (round) of the game
         """
         self.player_id = player_id
-        self.hole_cards = sorted(hole_cards)
-        self.community_cards = sorted(community_cards)
-        self.action_history = action_history
+        self.hole_cards = sorted(hole_cards) if hole_cards else []
+        self.community_cards = sorted(community_cards) if community_cards else []
+        self.action_history = action_history[:] if action_history else []
+        self.street = street
 
     def __hash__(self) -> int:
         """Generate a hash for the information state."""
         # Create a hashable representation of the state
         hole_cards_tuple = tuple(self.hole_cards)
         community_cards_tuple = tuple(self.community_cards)
+
+        # Make sure action history is hashable
         action_history_tuple = tuple(
             (p, a.value if isinstance(a, Action) else a, float(amt))
             for p, a, amt in self.action_history
         )
 
-        return hash((self.player_id, hole_cards_tuple, community_cards_tuple, action_history_tuple))
+        return hash((self.player_id, hole_cards_tuple, community_cards_tuple,
+                    action_history_tuple, self.street.value))
 
     def __eq__(self, other) -> bool:
         """Check if two information states are equal."""
@@ -64,7 +70,8 @@ class InfoState:
         return (self.player_id == other.player_id and
                 self.hole_cards == other.hole_cards and
                 self.community_cards == other.community_cards and
-                self.action_history == other.action_history)
+                self.action_history == other.action_history and
+                self.street == other.street)
 
     def __str__(self) -> str:
         """Return a string representation of the information state."""
@@ -75,7 +82,8 @@ class InfoState:
             for p, a, amt in self.action_history
         )
 
-        return f"Player {self.player_id} | Hole: [{hole_str}] | Community: [{comm_str}] | Actions: [{action_str}]"
+        return (f"Player {self.player_id} | Street: {self.street.name} | "
+                f"Hole: [{hole_str}] | Community: [{comm_str}] | Actions: [{action_str}]")
 
 
 class DiscountedRegretMinimization:
@@ -88,8 +96,8 @@ class DiscountedRegretMinimization:
     """
 
     def __init__(self, rules: PokerRules, evaluator: HandEvaluator,
-                 discount_factor: float = 0.95, device: torch.device = None,
-                 batch_size: int = 1024):
+                discount_factor: float = 0.95, device: torch.device = None,
+                batch_size: int = 1024):
         """
         Initialize the DRM algorithm.
 
@@ -109,7 +117,7 @@ class DiscountedRegretMinimization:
 
         # Initialize data structures for regret tracking
         self.cumulative_regrets = {}  # Maps info state to regrets for each action
-        self.strategy_sums = {}  # Maps info state to cumulative strategy profile
+        self.strategy_sums = {}       # Maps info state to cumulative strategy profile
         self.iteration_count = 0
 
         self.logger.info(f"Initialized DRM with discount factor {discount_factor}")
@@ -168,7 +176,7 @@ class DiscountedRegretMinimization:
         if total_positive_regret > 0:
             # Normalize positive regrets to form a probability distribution
             strategy = {action: regret / total_positive_regret
-                        for action, regret in positive_regrets.items()}
+                      for action, regret in positive_regrets.items()}
         else:
             # If all regrets are non-positive, use a uniform strategy
             strategy = {action: 1.0 / len(regrets) for action in regrets}
@@ -196,30 +204,30 @@ class DiscountedRegretMinimization:
             big_blind=self.rules.big_blind
         )
 
-        # Set hole cards
+        # Set hole cards - for other players, use empty lists
         player_cards = [[] for _ in range(game_state.num_players)]
-        player_cards[info_state.player_id] = info_state.hole_cards
+        player_cards[info_state.player_id] = info_state.hole_cards.copy()
         game_state.player_cards = player_cards
 
-        # Set community cards and determine street
-        game_state.community_cards = info_state.community_cards
-        if len(info_state.community_cards) == 0:
-            game_state.street = Street.PREFLOP
-        elif len(info_state.community_cards) == 3:
-            game_state.street = Street.FLOP
-        elif len(info_state.community_cards) == 4:
-            game_state.street = Street.TURN
-        elif len(info_state.community_cards) == 5:
-            game_state.street = Street.RIVER
+        # Set community cards
+        game_state.community_cards = info_state.community_cards.copy()
 
-        # Replay action history to build the game state
-        # For the prototype, this is simplified
+        # Set the current street
+        game_state.street = info_state.street
+
+        # Set the current player
         game_state.current_player = info_state.player_id
+
+        # Replay action history if provided
+        if info_state.action_history:
+            # This would normally update stacks, pot, etc. based on action history
+            # For simplicity in the prototype, we'll just set who's to act
+            game_state.action_history = info_state.action_history.copy()
 
         return game_state
 
     def update_strategy_sum(self, info_state: InfoState, strategy: Dict[Action, float],
-                            reach_prob: float) -> None:
+                           reach_prob: float) -> None:
         """
         Update the cumulative strategy sum for an information state.
 
@@ -230,9 +238,17 @@ class DiscountedRegretMinimization:
         """
         info_state_hash = hash(info_state)
 
+        # Initialize if not already present
+        if info_state_hash not in self.strategy_sums:
+            game_state = self._info_state_to_game_state(info_state)
+            legal_actions = game_state.get_legal_actions()
+            self.strategy_sums[info_state_hash] = {
+                action: 0.0 for action, _, _ in legal_actions
+            }
+
         # Update strategy sums weighted by reach probability
         for action, prob in strategy.items():
-            if info_state_hash in self.strategy_sums and action in self.strategy_sums[info_state_hash]:
+            if action in self.strategy_sums[info_state_hash]:
                 self.strategy_sums[info_state_hash][action] += reach_prob * prob
 
     def get_average_strategy(self, info_state: InfoState) -> Dict[Action, float]:
@@ -262,108 +278,198 @@ class DiscountedRegretMinimization:
         if total_sum > 0:
             # Normalize strategy sums to get the average strategy
             avg_strategy = {action: sum_val / total_sum
-                            for action, sum_val in strategy_sum.items()}
+                          for action, sum_val in strategy_sum.items()}
         else:
             # If all sums are 0, use a uniform strategy
             avg_strategy = {action: 1.0 / len(strategy_sum)
-                            for action in strategy_sum}
+                          for action in strategy_sum}
 
         return avg_strategy
 
-    def compute_cfr(self, state: GameState, reach_probs: List[float]) -> float:
+    def cfr_traverse(self, hole_cards: List[List[int]], initial_state: GameState) -> float:
         """
-        Perform counterfactual regret minimization traversal.
-
-        This is the core recursive algorithm that traverses the game tree
-        and updates regrets and strategies.
+        Non-recursive CFR tree traversal using an explicit stack.
 
         Args:
-            state: Current game state
-            reach_probs: Reach probabilities for each player
+            hole_cards: List of hole cards for each player
+            initial_state: Initial game state
 
         Returns:
-            Expected value of the state for the current player
+            Expected value for player 0
         """
-        player = state.current_player
+        # This class stores all the information we need for each state in the traversal
+        class TraversalState:
+            def __init__(self, game_state, reach_probs, player, return_value=None):
+                self.game_state = game_state
+                self.reach_probs = reach_probs
+                self.player = player
+                self.info_state = None
+                self.strategy = None
+                self.action_values = {}
+                self.state_value = 0.0
+                self.return_value = return_value
+                self.pending_actions = []
+                self.processed = False
 
-        # If the state is terminal, return payoffs
-        if state.is_terminal():
-            # For terminal states, evaluate the hand strength
-            hole_cards = [cards for cards in state.player_cards if cards]
-            if len(hole_cards) >= 2:  # Need at least 2 players with hole cards
-                hand_strengths = [
-                    self.evaluator.evaluate_hand(cards, state.community_cards)
-                    for cards in hole_cards
-                ]
-                payoffs = state.get_payoffs(hand_strengths)
-                return payoffs[player]
-            return 0.0
+        # Set hole cards in the initial state
+        for i, cards in enumerate(hole_cards):
+            initial_state.player_cards[i] = cards.copy()
 
-        # Create information state for the current player
-        info_state = InfoState(
-            player_id=player,
-            hole_cards=state.player_cards[player],
-            community_cards=state.community_cards,
-            action_history=state.action_history
-        )
+        # Initialize the traversal stack with the initial state
+        stack = deque([TraversalState(initial_state, [1.0, 1.0], initial_state.current_player)])
 
-        # Get the current strategy for this info state
-        strategy = self.get_strategy(info_state)
+        # Process states until the stack is empty
+        while stack:
+            # Get the current state from the top of the stack
+            current = stack[-1]
 
-        # Update the strategy sum (for computing the average strategy)
-        self.update_strategy_sum(info_state, strategy, reach_probs[player])
+            # If this state is fully processed, pop it and update its parent
+            if current.processed:
+                stack.pop()
 
-        # Initialize action values
-        action_values = {}
-        legal_actions = state.get_legal_actions()
+                # If the stack is now empty, we're done
+                if not stack:
+                    return current.state_value
 
-        # Compute counterfactual values for each action
-        for action, min_amount, max_amount in legal_actions:
-            # Clone the state for simulation
+                # Update the parent's action values with this state's value
+                parent = stack[-1]
+                action = parent.pending_actions.pop()
+                parent.action_values[action] = current.state_value
+
+                # If the parent has no more pending actions, calculate its value
+                if not parent.pending_actions:
+                    parent.processed = True
+
+                    # Calculate the expected value of the parent state
+                    parent.state_value = sum(parent.strategy.get(action, 0.0) * value
+                                           for action, value in parent.action_values.items())
+
+                    # Update regrets for the parent state
+                    info_state_hash = hash(parent.info_state)
+                    for action in parent.action_values:
+                        regret = parent.action_values[action] - parent.state_value
+                        cf_regret = regret * parent.reach_probs[1 - parent.player]
+
+                        # Apply discount factor
+                        if self.iteration_count > 0:
+                            self.cumulative_regrets[info_state_hash][action] *= self.discount_factor
+
+                        # Update cumulative regret
+                        self.cumulative_regrets[info_state_hash][action] += cf_regret
+
+                continue
+
+            # Handle terminal states
+            if current.game_state.is_terminal():
+                # For terminal states, evaluate the hand strength
+                if all(len(cards) > 0 for cards in current.game_state.player_cards):
+                    # Calculate hand strengths and payoffs
+                    hand_strengths = [
+                        self.evaluator.evaluate_hand(cards, current.game_state.community_cards)
+                        for cards in current.game_state.player_cards
+                    ]
+                    payoffs = current.game_state.get_payoffs(hand_strengths)
+                    current.state_value = payoffs[0]  # Return value for player 0
+                else:
+                    # If some players have unknown cards, use a default value
+                    current.state_value = 0.0
+
+                current.processed = True
+                continue
+
+            # If we haven't processed this state yet, calculate its strategy
+            if not current.info_state:
+                player = current.game_state.current_player
+                current.player = player
+
+                # Create information state
+                current.info_state = InfoState(
+                    player_id=player,
+                    hole_cards=current.game_state.player_cards[player],
+                    community_cards=current.game_state.community_cards,
+                    action_history=current.game_state.action_history,
+                    street=current.game_state.street
+                )
+
+                # Get the current strategy for this info state
+                current.strategy = self.get_strategy(current.info_state)
+
+                # Update the strategy sum for calculating average strategy
+                self.update_strategy_sum(current.info_state, current.strategy, current.reach_probs[player])
+
+                # Get legal actions for this state
+                legal_actions = current.game_state.get_legal_actions()
+                current.pending_actions = [action for action, _, _ in legal_actions]
+
+            # If no pending actions, this state is processed
+            if not current.pending_actions:
+                current.processed = True
+                current.state_value = 0.0
+                continue
+
+            # Process the next pending action
+            action = current.pending_actions[-1]  # Don't pop yet, wait until child returns
+
+            # Create the next state
             next_state = GameState(
-                num_players=state.num_players,
+                num_players=current.game_state.num_players,
                 stack_size=self.rules.stack_size,
                 small_blind=self.rules.small_blind,
                 big_blind=self.rules.big_blind
             )
+
             # Copy relevant state
-            next_state.pot = state.pot
-            next_state.street = state.street
-            next_state.current_player = state.current_player
-            next_state.player_cards = state.player_cards.copy()
-            next_state.community_cards = state.community_cards.copy()
+            next_state.pot = current.game_state.pot
+            next_state.street = current.game_state.street
+            next_state.current_player = current.game_state.current_player
+            next_state.player_cards = [cards.copy() if cards else [] for cards in current.game_state.player_cards]
+            next_state.community_cards = current.game_state.community_cards.copy()
+            next_state.action_history = current.game_state.action_history.copy() if current.game_state.action_history else []
+
+            # Find the min amount for the action (for bets/raises)
+            min_amount = 0.0
+            for legal_action, legal_min, _ in current.game_state.get_legal_actions():
+                if legal_action == action:
+                    min_amount = legal_min
+                    break
 
             # Apply the action
-            # For simplicity, using min_amount for bets/raises in the prototype
-            next_state.apply_action(action, min_amount)
+            try:
+                street_complete = next_state.apply_action(action, min_amount)
 
-            # Update reach probabilities
-            next_reach_probs = reach_probs.copy()
-            next_reach_probs[player] *= strategy[action]
+                # If the street is complete, deal new cards
+                if street_complete and not next_state.is_terminal():
+                    if next_state.street == Street.PREFLOP:
+                        # Deal flop (use random cards for prototype)
+                        random_cards = self.rules.get_random_cards(3, [])
+                        next_state.deal_community_cards(random_cards, Street.FLOP)
+                    elif next_state.street == Street.FLOP:
+                        # Deal turn (use random card)
+                        random_card = self.rules.get_random_cards(1, next_state.community_cards)
+                        next_state.deal_community_cards(random_card, Street.TURN)
+                    elif next_state.street == Street.TURN:
+                        # Deal river (use random card)
+                        random_card = self.rules.get_random_cards(1, next_state.community_cards)
+                        next_state.deal_community_cards(random_card, Street.RIVER)
+            except Exception as e:
+                self.logger.warning(f"Error applying action {action}: {e}")
+                current.pending_actions.pop()  # Skip this action
+                continue
 
-            # Recursively compute the value
-            action_values[action] = self.compute_cfr(next_state, next_reach_probs)
+            # Update reach probabilities for the next state
+            next_reach_probs = current.reach_probs.copy()
+            player = current.player
+            if action in current.strategy:
+                next_reach_probs[player] *= current.strategy[action]
+            else:
+                # Fall back to uniform strategy if action not in strategy (shouldn't happen)
+                next_reach_probs[player] *= 1.0 / len(current.pending_actions)
 
-        # Compute the expected value of the state under the current strategy
-        state_value = sum(strategy[action] * value for action, value in action_values.items())
+            # Push the next state onto the stack
+            stack.append(TraversalState(next_state, next_reach_probs, player))
 
-        # Compute and update counterfactual regrets
-        info_state_hash = hash(info_state)
-        for action in action_values:
-            # Regret = counterfactual value of action - expected value of state
-            regret = action_values[action] - state_value
-
-            # Counterfactual regret = reach probability of opponent * regret
-            cf_regret = regret * reach_probs[1 - player]
-
-            # Apply the discount factor to the current regret
-            if self.iteration_count > 0:
-                self.cumulative_regrets[info_state_hash][action] *= self.discount_factor
-
-            # Update the cumulative regret
-            self.cumulative_regrets[info_state_hash][action] += cf_regret
-
-        return state_value
+        # We should never reach here - the stack should always have a final value
+        return 0.0
 
     def iterate(self) -> Dict[str, Any]:
         """
@@ -373,7 +479,7 @@ class DiscountedRegretMinimization:
             Dictionary with metrics about the iteration
         """
         # Create a new random game state for this iteration
-        hole_cards, community_cards = self.rules.create_random_game(num_players=2)
+        hole_cards, _ = self.rules.create_random_game(num_players=2)
 
         # Initialize the game state
         state = GameState(
@@ -383,14 +489,8 @@ class DiscountedRegretMinimization:
             big_blind=self.rules.big_blind
         )
 
-        # Set the cards
-        state.deal_hole_cards(hole_cards)
-
-        # Initialize reach probabilities
-        reach_probs = [1.0, 1.0]
-
-        # Run CFR traversal for each player
-        player_0_value = self.compute_cfr(state, reach_probs)
+        # Run the non-recursive CFR
+        player_0_value = self.cfr_traverse(hole_cards, state)
 
         # Update iteration counter
         self.iteration_count += 1
