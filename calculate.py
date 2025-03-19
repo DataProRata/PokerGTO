@@ -25,7 +25,7 @@ if str(project_root) not in sys.path:
 from src.engine.game_state import GameState
 from src.engine.evaluator import HandEvaluator
 from src.engine.rules import PokerRules
-from src.algorithms.discounted_regret import DiscountedRegretMinimization
+from src.algorithms.discounted_regret_gpu import GPUDiscountedRegretMinimization
 from src.utils.cuda_utils import setup_cuda, get_cuda_info
 from src.utils.logging import setup_logger
 from src.utils.visualization import plot_convergence, plot_strategy
@@ -43,16 +43,18 @@ def parse_args():
                         help='Path to save the resulting model')
     parser.add_argument('--log_file', type=str, default=None,
                         help='Path to save the log file')
-    parser.add_argument('--eval_interval', type=int, default=10000,
+    parser.add_argument('--eval_interval', type=int, default=100,
                         help='Interval to evaluate and report progress')
     parser.add_argument('--save_interval', type=int, default=config.DRM_PARAMS['save_interval'],
                         help='Interval to save the model')
     parser.add_argument('--batch_size', type=int, default=config.DRM_PARAMS['batch_size'],
-                        help='Batch size for computation')
+                        help='Batch size for GPU computation')
     parser.add_argument('--no_cuda', action='store_true',
                         help='Disable CUDA even if available')
     parser.add_argument('--debug', action='store_true',
                         help='Enable debug logging')
+    parser.add_argument('--num_threads', type=int, default=4,
+                        help='Number of CPU threads for parallel operations')
     return parser.parse_args()
 
 
@@ -90,13 +92,14 @@ def create_model(args, device):
 
     evaluator = HandEvaluator()
 
-    # Initialize the DRM algorithm
-    drm = DiscountedRegretMinimization(
+    # Initialize the GPU-accelerated DRM algorithm
+    drm = GPUDiscountedRegretMinimization(
         rules=rules,
         evaluator=evaluator,
         discount_factor=args.discount,
         device=device,
-        batch_size=args.batch_size
+        batch_size=args.batch_size,
+        num_threads=args.num_threads
     )
 
     return drm
@@ -133,16 +136,33 @@ def train_model(drm, args, logger):
             exploitability = drm.compute_exploitability()
             exploitability_history.append((iteration, exploitability))
 
-            # Update progress bar and log
+            # Calculate iterations per second
+            iter_per_sec = iteration / max(0.001, elapsed)
+
+            # Calculate estimated remaining time
+            remaining_iterations = args.iterations - iteration
+            estimated_seconds = remaining_iterations / max(0.001, iter_per_sec)
+
+            # Format time as HH:MM:SS
+            hours, remainder = divmod(estimated_seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            time_str = f"{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}"
+
+            # Update progress bar
             pbar.set_postfix({
                 'Expl': f"{exploitability:.6f}",
                 'Conv': f"{convergence:.6f}",
-                'Iter/s': f"{iteration / elapsed:.1f}"
+                'Iter/s': f"{iter_per_sec:.1f}",
+                'ETA': time_str
             })
 
+            # Log more detailed metrics
             logger.info(f"Iteration {iteration}/{args.iterations}: "
                         f"Exploitability = {exploitability:.6f}, "
-                        f"Convergence = {convergence:.6f}")
+                        f"Convergence = {convergence:.6f}, "
+                        f"Iter/s = {iter_per_sec:.1f}, "
+                        f"Info states = {metrics.get('num_info_states', 0)}, "
+                        f"Cache hit rate = {metrics.get('cache_hit_rate', 0.0):.2f}")
 
             # Check if this is the best model so far
             if exploitability < best_exploitability:
@@ -156,8 +176,8 @@ def train_model(drm, args, logger):
             drm.save_model(checkpoint_path)
 
             # Also save visualization
-            plot_convergence(convergence_history, save_path / f"convergence_{iteration}.png")
-            plot_strategy(drm, save_path / f"strategy_{iteration}.png")
+            if iteration >= 100:  # Only save visualization after some iterations
+                plot_convergence(convergence_history, save_path / f"convergence_{iteration}.png")
 
     # Save the final model
     drm.save_model(save_path / "final_model")
@@ -168,11 +188,11 @@ def train_model(drm, args, logger):
 
     # Generate and save final visualizations
     plot_convergence(convergence_history, save_path / "convergence_final.png")
-    plot_strategy(drm, save_path / "strategy_final.png")
 
     # Report training stats
     total_time = time.time() - start_time
-    logger.info(f"Training completed in {total_time:.2f} seconds")
+    iterations_per_second = args.iterations / max(0.001, total_time)
+    logger.info(f"Training completed in {total_time:.2f} seconds ({iterations_per_second:.1f} iterations/sec)")
     logger.info(f"Final exploitability: {best_exploitability:.6f}")
     logger.info(f"Models saved to {save_path}")
 
@@ -189,7 +209,7 @@ def main():
 
     try:
         # Create model
-        logger.info("Initializing DRM model...")
+        logger.info("Initializing GPU-accelerated DRM model...")
         drm = create_model(args, device)
 
         # Train model
