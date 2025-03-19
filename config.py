@@ -21,7 +21,7 @@ for directory in [MODELS_DIR, DATA_DIR, LOG_DIR, TRAINING_HISTORY_DIR]:
     directory.mkdir(exist_ok=True, parents=True)
 
 # Default model paths
-DRM_MODEL_PATH = MODELS_DIR / "drm_model"
+DRM_MODEL_PATH = MODELS_DIR / "drm_model/final_model"
 ADAPTIVE_MODEL_PATH = MODELS_DIR / "adaptive_model"
 
 # Hardware Settings

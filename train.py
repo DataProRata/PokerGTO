@@ -134,7 +134,7 @@ def train_model(drm, args, logger):
     # Placeholder for Slumbot API implementation
     # In a real implementation, you would:
     # 1. Initialize a SlumbotClient
-    # 2. Play games against Slumbot
+    # 2. Play games against  Slumbot
     # 3. Update the model based on game results
 
     # Simulate training with dummy data for now
