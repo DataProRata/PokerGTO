@@ -1,0 +1,9 @@
+numpy
+pandas
+matplotlib
+torch
+tensorboard
+requests
+python-dotenv
+tqdm
+pytest
